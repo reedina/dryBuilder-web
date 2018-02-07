@@ -112,6 +112,25 @@ import { FielderrorsComponent } from './fielderrors/fielderrors.component';
 import { EnvironmentInstancesComponent } from './environment-instances/environment-instances.component';
 import { EnvironmentInstancesService } from './environment-instances/environment-instances.service';
 
+import { StoreModule, MetaReducer} from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { reducers, effects, CustomSerializer} from './store';
+
+// not used in production
+import { StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { storeFreeze } from 'ngrx-store-freeze';
+
+// environment is development
+const environment = {
+    development: true,
+    production: false,
+  };
+
+export const metaReducers: MetaReducer<any>[] = !environment.production
+   ? [storeFreeze]
+   : [];
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -184,7 +203,11 @@ import { EnvironmentInstancesService } from './environment-instances/environment
         TooltipModule,
         TreeModule,
         TreeTableModule,
-        ReactiveFormsModule        
+        ReactiveFormsModule,
+        StoreModule.forRoot(reducers, { metaReducers}),
+        EffectsModule.forRoot(effects),
+        StoreRouterConnectingModule,
+        environment.development ? StoreDevtoolsModule.instrument() : [],
     ],
     declarations: [
         AppComponent,
@@ -217,7 +240,9 @@ import { EnvironmentInstancesService } from './environment-instances/environment
 
     ],
     providers: [
-        CarService, CountryService, EventService, NodeService, TeamService, UserService, ProjectService, EnvironmentService, EnvironmentInstancesService
+        CarService, CountryService, EventService, NodeService, TeamService, UserService, 
+        ProjectService, EnvironmentService, EnvironmentInstancesService,
+        {provide: RouterStateSerializer, useClass: CustomSerializer }
     ],
     bootstrap: [AppComponent]
 })
