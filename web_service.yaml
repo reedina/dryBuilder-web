@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-api 
+spec:
+  type: LoadBalancer
+  selector:
+    app: web-api 
+  ports:
+  - protocol: TCP
+    port: 9090 
+    targetPort: 9090 

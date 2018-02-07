@@ -1,0 +1,110 @@
+-------------------------------------------------------------------------------------------------------------------------
+Resource:  USER
+------------------------------------------------------------------------------------------------------------------------
+app.use('/api/users', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+app.use('/api/user', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+
+(1) GET
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-get-users' \
+  --data 'uris=/api/users' \
+  --data 'upstream_url=http://spm-api:4040/api/users'
+
+
+(2) PUT
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-post-user' \
+  --data 'uris=/api/user' \
+  --data 'upstream_url=http://spm-api:4040/api/user'
+
+
+-------------------------------------------------------------------------------------------------------------------------
+Resource:  TEAM
+-------------------------------------------------------------------------------------------------------------------------
+app.use('/api/teams', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+app.use('/api/team', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+
+(1) GET
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-get-teams' \
+  --data 'uris=/api/teams' \
+  --data 'upstream_url=http://spm-api:4040/api/teams'
+
+
+(2) PUT
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-post-team' \
+  --data 'uris=/api/team' \
+  --data 'upstream_url=http://spm-api:4040/api/team'
+
+-------------------------------------------------------------------------------------------------------------------------
+Resource:  PROJECT
+------------------------------------------------------------------------------------------------------------------------
+app.use('/api/projects', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+app.use('/api/project', proxy({target: 'http://localhost:4040', changeOrigin: true}));
+
+
+(1) GET
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-get-projects' \
+  --data 'uris=/api/projects' \
+  --data 'upstream_url=http://spm-api:4040/api/projects'
+
+
+(2) PUT
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=spm-post-project' \
+  --data 'uris=/api/project' \
+  --data 'upstream_url=http://spm-api:4040/api/project'
+-------------------------------------------------------------------------------------------------------------------------
+Resource:  ENVIRONMENTS
+------------------------------------------------------------------------------------------------------------------------
+app.use('/api/environments', proxy({target: 'http://localhost:4050', changeOrigin: true}));
+app.use('/api/environment', proxy({target: 'http://localhost:4050', changeOrigin: true}));
+
+
+(1) GET
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=sbm-get-environments' \
+  --data 'uris=/api/environments' \
+  --data 'upstream_url=http://sbm-api:4050/api/environments'
+
+
+(2) PUT
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=sbm-post-environment' \
+  --data 'uris=/api/environment' \
+  --data 'upstream_url=http://sbm-api:4050/api/environment'
+-------------------------------------------------------------------------------------------------------------------------
+Resource:  ENVIRONMENT INSTANCES
+------------------------------------------------------------------------------------------------------------------------
+
+app.use('/api/environment/instances', proxy({target: 'http://localhost:4050', changeOrigin: true}));
+app.use('/api/environment/instance', proxy({target: 'http://localhost:4050', changeOrigin: true}));
+
+(1) GET
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=sbm-get-environment-instances' \
+  --data 'uris=/api/environment/instances' \
+  --data 'upstream_url=http://sbm-api:4050/api/environment/instances'
+
+
+(2) PUT
+curl -i -X POST \
+  --url http://35.227.106.251:8001/apis/ \
+  --data 'name=sbm-post-environment-instance' \
+  --data 'uris=/api/environment/instance' \
+  --data 'upstream_url=http://sbm-api:4050/api/environment/instance'
+
+
+
+

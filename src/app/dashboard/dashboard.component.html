@@ -1,0 +1,82 @@
+<div class="ui-g dashboard">
+
+<div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-3">
+            <div class="ui-g-4">
+                <i class="material-icons">assignment_turned_in</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Done Tickets</span>
+                <span class="colorbox-count">25</span>
+            </div>
+        </div>
+</div>    
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-1">
+            <div class="ui-g-4">
+                <i class="material-icons">assignment_ind</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Open Tickets</span>
+                <span class="colorbox-count">6</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-2">
+            <div class="ui-g-4">
+                <i class="material-icons">assignment_late</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Late Tickets</span>
+                <span class="colorbox-count">1</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card colorbox colorbox-4">
+            <div class="ui-g-4">
+                <i class="material-icons">assignment</i>
+            </div>
+            <div class="ui-g-8">
+                <span class="colorbox-name">Backlog Tickets</span>
+                <span class="colorbox-count">8</span>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-lg-6">
+            <div class="card">
+                <h1 class="centerText">Kubernetes Containers</h1>
+                <p-chart type="line" [data]="lineData"></p-chart>
+            </div>
+            
+            <div class="card">
+                <h1 class="centerText">Hours By Project - North America</h1>
+                <p-chart type="pie" [data]="pieData"></p-chart>
+            </div>
+            
+  
+        </div>
+        <div class="ui-g-12 ui-lg-6">
+            <div class="card">
+                <h1 class="centerText">Cloud Provider Costs </h1>
+                <p-chart type="bar" [data]="barData"></p-chart>
+            </div>
+            
+            <div class="card">
+                <h1 class="centerText">Hours by Project - Europe</h1>
+                <p-chart type="doughnut" [data]="donutData"></p-chart>
+            </div>
+            
+           
+        </div>
+    </div>
+            
+    
+    
+
+     

@@ -1,0 +1,23 @@
+----------------------------------------------------------------------------------------------
+TODO
+----------------------------------------------------------------------------------------------
+- Add features first to include
+  (1) RBAC  << STUDY>> and << GENERAL Angular Stuff >>  and << Golang stuff >>
+  (2) AWS installation
+  (3) Azure installation
+  (4) GKE installation
+  (5) Flush some bacis official documentation
+  (6) Clean up code
+  (7) Connect to Korben Jenkins in AWS
+  (8) Setup RBAC  << BIG DEAL >>
+  (9) provide edit and delete features in UI  << BIG DEAL >>
+  (10) Make sure CI/CD is setup properly for Development
+  (12) Setup Jira connectors to create JIRA tickets  (check if we will be doing something with SFDC)
+
+--------------------------- 
+Goals Now
+ - Study Angular
+ - Study Golang
+ - Figure out Angular RBAC installation and test this
+ - By January 15th have an account administration setup
+ - AFTER RBAC, fix/add edit and delete in interface AND add mroe features to interface based on RBAC

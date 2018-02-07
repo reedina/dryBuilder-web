@@ -1,0 +1,68 @@
+<div class="alltimesheets ui-g">
+
+    <div class="header ui-g-12">
+  
+      <h2>
+        Environments
+      </h2>
+    </div>
+    
+  <!-- Data Table -->     
+  <p-dataTable #dt [value]="environments" class="ui-g-12 ui-lg-8" sortField="name" sortOrder="1" emptyMessage="No environments found"
+  [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="environments"
+   [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+
+      <p-column field="id" header="Id"></p-column> 
+      <p-column field="name" header="Name" [sortable]="true" ></p-column>
+      <p-column field="type" header="Type" [sortable]="true" ></p-column>
+      <p-column field="url" header="Build URL" [sortable]="true" ></p-column>
+      <p-footer>
+          <label for="tableSearch">Search: </label>
+          <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+          <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+          
+        </p-footer>
+
+  </p-dataTable>
+
+  <!-- Panel for Form -->
+<p-panel header="Add Environment" class="ui-g-12 ui-lg-4">
+    <form [formGroup]="environmentForm" (ngSubmit)="save()">
+  
+      <!-- Input Name -->
+      <div class="ui-g">
+           <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
+           <input type="text" pInputText id="NameID" formControlName="name" placeholder="Environment Name"  class="ui-g-12 ui-lg-10">
+           <div  class="ui-g-12" > 
+              <at-fielderrors [form]="environmentForm" field="name" nicename="Name"> </at-fielderrors>
+           </div>
+      </div>
+
+      <!-- Input URL -->
+      <div class="ui-g">
+        <label for="URLID" class="ui-g-12 ui-lg-2">Build URL</label>
+        <input type="text" pInputText id="URLID" formControlName="url" placeholder="http://localhost:8000/api/test"  class="ui-g-12 ui-lg-10">
+        <div  class="ui-g-12" > 
+           <at-fielderrors [form]="environmentForm" field="url" nicename="Build URL"> </at-fielderrors>
+        </div>
+      </div> 
+
+      <!-- Select Button -->
+      <div class="ui-g">
+        <label for="TypeID" class="ui-g-12 ui-lg-2">Type</label>
+        <div class="ui-g-12 ui-lg-10">
+            <p-selectButton [options]="selectButton" formControlName="type"></p-selectButton>
+        </div>
+       </div>
+      
+  
+     <!-- Submit/Reset Button -->
+     <div>
+      <button pButton type="submit" [disabled]="!environmentForm.valid" label="Save" icon="ui-icon-save"></button>     
+      <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!environmentForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+      </div>
+                    
+      </form>
+   </p-panel>
+   <p-growl [value]="msgs" life="5000"></p-growl>   
+</div>
