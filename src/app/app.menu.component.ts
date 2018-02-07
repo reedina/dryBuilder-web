@@ -30,10 +30,12 @@ export class AppMenuComponent implements OnInit {
                 ]
             },       
             {
-                label: 'Environments', icon: 'cloud_queue',
+                label: 'Builds', icon: 'cloud_queue',
                 items: [
                     {label: 'Manage', icon: 'edit', routerLink: ['/environments']},
-                    {label: 'Build', icon: 'build', routerLink: ['/envinstances']}                         
+                    {label: 'Env Build', icon: 'build', routerLink: ['/envinstances']},
+                    {label: 'Packer', icon: 'build', routerLink: ['/builds']}
+
                 ]
             },                 
 /*

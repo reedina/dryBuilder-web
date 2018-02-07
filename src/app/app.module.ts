@@ -112,6 +112,8 @@ import { FielderrorsComponent } from './fielderrors/fielderrors.component';
 import { EnvironmentInstancesComponent } from './environment-instances/environment-instances.component';
 import { EnvironmentInstancesService } from './environment-instances/environment-instances.service';
 
+import { Routes, RouterModule } from '@angular/router';
+
 import { StoreModule, MetaReducer} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
@@ -130,6 +132,13 @@ const environment = {
 export const metaReducers: MetaReducer<any>[] = !environment.production
    ? [storeFreeze]
    : [];
+
+   // routes
+export const ROUTES: Routes = [
+    { path: 'builds',
+      loadChildren: '../builds/builds.module#BuildsModule'
+    },
+ ];
 
 @NgModule({
     imports: [
@@ -204,6 +213,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
         TreeModule,
         TreeTableModule,
         ReactiveFormsModule,
+        RouterModule.forRoot(ROUTES),
         StoreModule.forRoot(reducers, { metaReducers}),
         EffectsModule.forRoot(effects),
         StoreRouterConnectingModule,
