@@ -1,16 +1,8 @@
-import { AfterContentInit, OnDestroy, EventEmitter, OnInit, EmbeddedViewRef, ViewContainerRef, QueryList, TemplateRef } from '@angular/core';
+import { AfterContentInit, OnDestroy, EventEmitter, OnInit, QueryList, TemplateRef, ElementRef } from '@angular/core';
 import { TreeNode } from '../common/treenode';
 import { TreeDragDropService } from '../common/treedragdropservice';
 import { Subscription } from 'rxjs/Subscription';
-export declare class TreeNodeTemplateLoader implements OnInit, OnDestroy {
-    viewContainer: ViewContainerRef;
-    node: any;
-    template: TemplateRef<any>;
-    view: EmbeddedViewRef<any>;
-    constructor(viewContainer: ViewContainerRef);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
-}
+import { BlockableUI } from '../common/blockableui';
 export declare class UITreeNode implements OnInit {
     tree: Tree;
     static ICON_CLASS: string;
@@ -43,7 +35,8 @@ export declare class UITreeNode implements OnInit {
     onDropNodeDragEnter(event: any): void;
     onDropNodeDragLeave(event: any): void;
 }
-export declare class Tree implements OnInit, AfterContentInit, OnDestroy {
+export declare class Tree implements OnInit, AfterContentInit, OnDestroy, BlockableUI {
+    el: ElementRef;
     dragDropService: TreeDragDropService;
     value: TreeNode[];
     selectionMode: string;
@@ -68,6 +61,7 @@ export declare class Tree implements OnInit, AfterContentInit, OnDestroy {
     propagateSelectionDown: boolean;
     loading: boolean;
     loadingIcon: string;
+    emptyMessage: string;
     templates: QueryList<any>;
     templateMap: any;
     nodeTouched: boolean;
@@ -79,7 +73,7 @@ export declare class Tree implements OnInit, AfterContentInit, OnDestroy {
     dragHover: boolean;
     dragStartSubscription: Subscription;
     dragStopSubscription: Subscription;
-    constructor(dragDropService: TreeDragDropService);
+    constructor(el: ElementRef, dragDropService: TreeDragDropService);
     ngOnInit(): void;
     readonly horizontal: boolean;
     ngAfterContentInit(): void;
@@ -100,6 +94,7 @@ export declare class Tree implements OnInit, AfterContentInit, OnDestroy {
     onDragLeave(event: any): void;
     allowDrop(dragNode: TreeNode, dropNode: TreeNode, dragNodeScope: any): boolean;
     isValidDragScope(dragScope: any): boolean;
+    getBlockableElement(): HTMLElement;
     ngOnDestroy(): void;
 }
 export declare class TreeModule {

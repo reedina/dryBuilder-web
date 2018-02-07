@@ -6,6 +6,8 @@ export declare class Messages implements OnDestroy {
     messageService: MessageService;
     value: Message[];
     closable: boolean;
+    style: any;
+    styleClass: string;
     valueChange: EventEmitter<Message[]>;
     subscription: Subscription;
     constructor(messageService: MessageService);

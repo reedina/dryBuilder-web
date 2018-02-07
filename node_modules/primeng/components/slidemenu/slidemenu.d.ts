@@ -28,6 +28,8 @@ export declare class SlideMenu implements AfterViewInit, OnDestroy {
     easing: string;
     backLabel: string;
     appendTo: any;
+    autoZIndex: boolean;
+    baseZIndex: number;
     containerViewChild: ElementRef;
     backwardViewChild: ElementRef;
     slideMenuContentViewChild: ElementRef;
@@ -43,6 +45,7 @@ export declare class SlideMenu implements AfterViewInit, OnDestroy {
     toggle(event: any): void;
     show(event: any): void;
     hide(): void;
+    moveOnTop(): void;
     onClick(event: any): void;
     goBack(): void;
     ngOnDestroy(): void;

@@ -19,6 +19,7 @@ export declare class DataList implements AfterViewInit, AfterContentInit, DoChec
     immutable: boolean;
     scrollable: boolean;
     scrollHeight: string;
+    paginatorDropdownAppendTo: any;
     onPage: EventEmitter<any>;
     header: any;
     footer: any;

@@ -17,6 +17,7 @@ export declare class DataGrid implements AfterViewInit, AfterContentInit, DoChec
     alwaysShowPaginator: boolean;
     trackBy: Function;
     immutable: boolean;
+    paginatorDropdownAppendTo: any;
     onPage: EventEmitter<any>;
     header: any;
     footer: any;

@@ -9,6 +9,7 @@ export declare class ContextMenuSub {
     constructor(domHandler: DomHandler, contextMenu: ContextMenu);
     activeItem: any;
     containerLeft: any;
+    hideTimeout: any;
     onItemMouseEnter(event: any, item: any, menuitem: any): void;
     onItemMouseLeave(event: any, link: any): void;
     itemClick(event: any, item: MenuItem): void;
@@ -26,15 +27,16 @@ export declare class ContextMenu implements AfterViewInit, OnDestroy {
     style: any;
     styleClass: string;
     appendTo: any;
+    autoZIndex: boolean;
+    baseZIndex: number;
     containerViewChild: ElementRef;
-    container: HTMLDivElement;
-    visible: boolean;
     documentClickListener: any;
     rightClickListener: any;
     constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer2);
     ngAfterViewInit(): void;
     show(event?: MouseEvent): void;
     hide(): void;
+    moveOnTop(): void;
     toggle(event?: MouseEvent): void;
     position(event?: MouseEvent): void;
     bindDocumentClickListener(): void;

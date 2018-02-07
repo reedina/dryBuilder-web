@@ -1,6 +1,6 @@
-import { ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { ElementRef, EventEmitter, AfterViewInit, OnDestroy } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
-export declare class Button implements AfterViewInit, OnDestroy {
+export declare class ButtonDirective implements AfterViewInit, OnDestroy {
     el: ElementRef;
     domHandler: DomHandler;
     iconPos: string;
@@ -14,6 +14,18 @@ export declare class Button implements AfterViewInit, OnDestroy {
     label: string;
     icon: string;
     ngOnDestroy(): void;
+}
+export declare class Button {
+    type: string;
+    iconPos: string;
+    icon: string;
+    label: string;
+    disabled: boolean;
+    style: any;
+    styleClass: string;
+    onClick: EventEmitter<any>;
+    onFocus: EventEmitter<any>;
+    onBlur: EventEmitter<any>;
 }
 export declare class ButtonModule {
 }

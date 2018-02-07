@@ -9,7 +9,10 @@ export declare class MegaMenu {
     style: any;
     styleClass: string;
     orientation: string;
+    autoZIndex: boolean;
+    baseZIndex: number;
     activeItem: any;
+    hideTimeout: any;
     constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer2);
     onItemMouseEnter(event: any, item: any, menuitem: MenuItem): void;
     onItemMouseLeave(event: any, link: any): void;

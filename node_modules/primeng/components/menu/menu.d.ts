@@ -15,6 +15,8 @@ export declare class Menu implements AfterViewInit, OnDestroy {
     style: any;
     styleClass: string;
     appendTo: any;
+    autoZIndex: boolean;
+    baseZIndex: number;
     containerViewChild: ElementRef;
     container: HTMLDivElement;
     documentClickListener: any;
@@ -25,6 +27,7 @@ export declare class Menu implements AfterViewInit, OnDestroy {
     toggle(event: any): void;
     onResize(event: any): void;
     show(event: any): void;
+    moveOnTop(): void;
     hide(): void;
     itemClick(event: any, item: MenuItem): void;
     ngOnDestroy(): void;

@@ -2,7 +2,9 @@ import { OnInit, OnDestroy, EventEmitter, TemplateRef, AfterViewInit, AfterConte
 import { DomSanitizer } from '@angular/platform-browser';
 import { DomHandler } from '../dom/domhandler';
 import { Message } from '../common/message';
-export declare class FileUpload implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
+import { BlockableUI } from '../common/blockableui';
+export declare class FileUpload implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, BlockableUI {
+    private el;
     domHandler: DomHandler;
     sanitizer: DomSanitizer;
     zone: NgZone;
@@ -50,8 +52,8 @@ export declare class FileUpload implements OnInit, AfterViewInit, AfterContentIn
     contentTemplate: TemplateRef<any>;
     toolbarTemplate: TemplateRef<any>;
     focus: boolean;
-    selfInputChange: boolean;
-    constructor(domHandler: DomHandler, sanitizer: DomSanitizer, zone: NgZone);
+    duplicateIEEvent: boolean;
+    constructor(el: ElementRef, domHandler: DomHandler, sanitizer: DomSanitizer, zone: NgZone);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;
@@ -69,6 +71,7 @@ export declare class FileUpload implements OnInit, AfterViewInit, AfterContentIn
     clear(): void;
     remove(event: Event, index: number): void;
     clearInputElement(): void;
+    clearIEInput(): void;
     hasFiles(): boolean;
     onDragEnter(e: any): void;
     onDragOver(e: any): void;
@@ -78,6 +81,7 @@ export declare class FileUpload implements OnInit, AfterViewInit, AfterContentIn
     onBlur(): void;
     formatSize(bytes: any): string;
     onSimpleUploaderClick(event: Event): void;
+    getBlockableElement(): HTMLElement;
     ngOnDestroy(): void;
 }
 export declare class FileUploadModule {

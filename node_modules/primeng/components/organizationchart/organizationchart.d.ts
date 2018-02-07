@@ -1,15 +1,6 @@
-import { ElementRef, OnInit, AfterContentInit, OnDestroy, EventEmitter, TemplateRef, EmbeddedViewRef, ViewContainerRef, QueryList } from '@angular/core';
+import { ElementRef, AfterContentInit, EventEmitter, TemplateRef, QueryList } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
 import { TreeNode } from '../common/treenode';
-export declare class OrganizationChartNodeTemplateLoader implements OnInit, OnDestroy {
-    viewContainer: ViewContainerRef;
-    node: any;
-    template: TemplateRef<any>;
-    view: EmbeddedViewRef<any>;
-    constructor(viewContainer: ViewContainerRef);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
-}
 export declare class OrganizationChartNode {
     chart: OrganizationChart;
     node: TreeNode;

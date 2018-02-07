@@ -1,6 +1,8 @@
 import { ElementRef, OnInit, DoCheck, EventEmitter } from '@angular/core';
+import { NgModel } from '@angular/forms';
 export declare class InputTextarea implements OnInit, DoCheck {
     el: ElementRef;
+    ngModel: NgModel;
     autoResize: boolean;
     rows: number;
     cols: number;
@@ -8,7 +10,7 @@ export declare class InputTextarea implements OnInit, DoCheck {
     rowsDefault: number;
     colsDefault: number;
     filled: boolean;
-    constructor(el: ElementRef);
+    constructor(el: ElementRef, ngModel: NgModel);
     ngOnInit(): void;
     ngDoCheck(): void;
     onInput(e: any): void;
