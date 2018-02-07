@@ -6,19 +6,20 @@ import * as fromStore from '../../store';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  styleUrls: ['builds.component.css'],
+  styleUrls: ['packer.component.css'],
   template: `
+    <app-packer-display></app-packer-display>
     <div>Hello from builds component</div>
-
-    <div *ngFor="let template of (packerTemplates$ | async); let i = index">
-              Packer Template Friendly Name: <b>{{ template.friendly_name}}</b>
-              <div *ngFor="let build of template.builders; let i = index">
-                       Builder Friendly Name: {{ build.friendly_name }}
-              </div>
-    </div>
+    
+        <div *ngFor="let template of (packerTemplates$ | async); let i = index">
+                  Packer Template Friendly Name: <b>{{ template.friendly_name}}</b>
+                  <div *ngFor="let build of template.builders; let i = index">
+                           Builder Friendly Name: {{ build.friendly_name }}
+                  </div>
+        </div>
   `
 })
-export class BuildsComponent  implements OnInit {
+export class PackerComponent  implements OnInit {
 
   packerTemplates$: Observable<PackerTemplate[]>;
 

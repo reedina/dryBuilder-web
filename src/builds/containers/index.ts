@@ -1,5 +1,5 @@
-import { BuildsComponent } from './builds/builds.component';
+import { PackerComponent } from './packer/packer.component';
 
-export const containers: any[] = [BuildsComponent];
+export const containers: any[] = [PackerComponent];
 
-export * from './builds/builds.component';
+export * from './packer/packer.component';
