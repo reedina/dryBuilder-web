@@ -1,0 +1,28 @@
+import { Action } from '@ngrx/store';
+import { AwsRegion } from '../../models/aws-region.model';
+
+
+// LOAD AWS REGIONS
+// Action Constants
+export const LOAD_AWS_REGIONS = '[Builds] Load AWS Regions';
+export const LOAD_AWS_REGIONS_FAIL = '[Builds] AWS Regions Fail';
+export const LOAD_AWS_REGIONS_SUCCESS = '[Builds] Load AWS Regions Success';
+
+// Action Creators
+export class LoadAwsRegions implements Action {
+   readonly type = LOAD_AWS_REGIONS;
+}
+export class LoadAwsRegionsFail implements Action {
+  readonly type = LOAD_AWS_REGIONS_FAIL;
+  constructor(public payload: any) {}
+}
+export class LoadAwsRegionsSuccess implements Action {
+  readonly type = LOAD_AWS_REGIONS_SUCCESS;
+  constructor(public payload: AwsRegion[]) {}
+}
+
+// Action Types
+export type AwsRegionsActions =
+ | LoadAwsRegions
+ | LoadAwsRegionsFail
+ | LoadAwsRegionsSuccess;

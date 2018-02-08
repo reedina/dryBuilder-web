@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { PackerTemplate } from '../../models/packer-template.model';
+import { Component, Input} from '@angular/core';
+import { AwsRegion } from '../../models/aws-region.model';
 import { MenuItem, DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {Message} from 'primeng/primeng';
@@ -12,8 +12,10 @@ import {Message} from 'primeng/primeng';
 })
 export class AwsRegionsDisplayComponent {
 
+@Input() awsRegions: AwsRegion[];
+
   environmentInstanceForm: FormGroup;
-  
+
   constructor(private fb: FormBuilder) {
     this.environmentInstanceForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -25,5 +27,4 @@ export class AwsRegionsDisplayComponent {
       });
 
     }
-  
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PackerTemplate } from '../../models/packer-template.model';
+import { AwsRegion } from '../../models/aws-region.model';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
@@ -8,25 +8,17 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   styleUrls: ['aws-regions.component.css'],
   template: `
-    <app-aws-regions-display></app-aws-regions-display>
-    <div>Hello from builds component</div>
+    <app-aws-regions-display [awsRegions]="awsRegions$ | async"></app-aws-regions-display>
 
-        <div *ngFor="let template of (packerTemplates$ | async); let i = index">
-                  Packer Template Friendly Name: <b>{{ template.friendly_name}}</b>
-                  <div *ngFor="let build of template.builders; let i = index">
-                           Builder Friendly Name: {{ build.friendly_name }}
-                  </div>
-        </div>
   `
 })
 export class AwsRegionsComponent  implements OnInit {
 
-  packerTemplates$: Observable<PackerTemplate[]>;
+  awsRegions$: Observable<AwsRegion[]>;
 
   constructor(private store: Store<fromStore.BuildState>) {}
 
   ngOnInit() {
-     console.log(this.store.select('packer'));
-     this.packerTemplates$ = this.store.select(fromStore.getPackerTemplateEntities);
+      this.awsRegions$ = this.store.select(fromStore.getAwsRegionsEntities);
   }
 }
