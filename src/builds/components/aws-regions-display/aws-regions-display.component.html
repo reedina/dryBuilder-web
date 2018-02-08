@@ -11,8 +11,8 @@
     [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
      [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
   
-        <p-column field="id" header="Id"></p-column> 
-        <p-column field="region_name" header="Region Name" [sortable]="true" ></p-column>
+     <p-column field="id" header="Id" [sortable]="true"></p-column>
+        <p-column field="name" header="Region Name" [sortable]="true" ></p-column>
         <p-column field="region" header="Region" [sortable]="true" ></p-column>
         <p-column field="endpoint" header="End Point" [sortable]="true" ></p-column>      
         <p-footer>

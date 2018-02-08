@@ -84,6 +84,9 @@ import * as fromComponents from './components';
 // container
 import * as fromContainers from './containers';
 
+// services
+import * as fromServices from './services';
+
 // routes
 export const ROUTES: Routes = [
   {
@@ -177,6 +180,7 @@ export const ROUTES: Routes = [
   TreeModule,
   TreeTableModule,
  ],
+  providers: [...fromServices.services],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [...fromContainers.containers ]
 })
