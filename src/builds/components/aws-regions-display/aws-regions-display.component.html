@@ -1,0 +1,81 @@
+<div class="alltimesheets ui-g">
+    
+      <div class="header ui-g-12">
+        <h2>
+          AWS - Regions
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="environmentInstances" class="ui-g-12 ui-lg-8" sortField="name" sortOrder="1" emptyMessage="No instances found"
+    [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
+     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+  
+        <p-column field="id" header="Id"></p-column> 
+        <p-column field="name" header="Name" [sortable]="true" ></p-column>
+        <p-column field="deletion_time" header="Deletion Time" [sortable]="true" ></p-column>
+        <p-column field="environment.name" header="Environment Name" [sortable]="true" ></p-column>
+        <p-column field="environment.type" header="Environment Type" [sortable]="true" ></p-column>
+        <p-column field="team.name" header="Team Name" [sortable]="true" ></p-column>      
+        <p-column field="project.name" header="Project Name" [sortable]="true" ></p-column>        
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+  <!-- Panel for Form -->
+  <p-panel header="Create Packer Template" class="ui-g-12 ui-lg-4">
+    <form [formGroup]="environmentInstanceForm" (ngSubmit)="save()">
+  
+      <!-- Input Name -->
+      <div class="ui-g">
+           <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
+           <input type="text" pInputText id="NameID" formControlName="name" placeholder="My Instance"  class="ui-g-12 ui-lg-10">
+           <div  class="ui-g-12" > 
+              <at-fielderrors [form]="environmentInstanceForm" field="name" nicename="Name"> </at-fielderrors>
+           </div>
+      </div>
+  
+      <!-- Select Environment -->
+      <div class="ui-g">
+        <label for="EnvironmentID" class="ui-g-12 ui-lg-2">Environment</label>
+        <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="EnvironmentID" formControlName="environment" [options]="environmentsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
+      </div>    
+  
+       <!-- Select Team -->
+       <div class="ui-g">
+       <label for="TeamID" class="ui-g-12 ui-lg-2">Team</label>
+         <p-dropdown  (onChange)="createProjectsDropdown($event)" autoWidth="true"  [style]="{'width': '100%'}" id="TeamID" formControlName="team" [options]="teamsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
+       </div>  
+  
+            <!-- Select Project -->
+        <div class="ui-g">
+          <label for="ProjectID" class="ui-g-12 ui-lg-2">Project</label>
+           <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="ProjectID" formControlName="project" [options]="projectsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
+         </div> 
+  
+      <!-- Input Deletion Time -->
+      <div class="ui-g">
+        <label for="DeletionTimeID" class="ui-g-12 ui-lg-2">Deletion Time</label>
+        <p-calendar [showIcon]="true" id="deletionTimeID" showTime="true" formControlName="deletion_time" dateFormat="mm/dd/yy" class="ui-g-12 ui-lg-10" [minDate]="minDeleteDate"></p-calendar>
+        <!--<input type="text" pInputText id="DeletionTimeID" formControlName="deletion_time" placeholder="Doe"  class="ui-g-12 ui-lg-10"> -->
+        <div  class="ui-g-12" > 
+           <at-fielderrors [form]="environmentInstanceForm" field="deletion_time" nicename="Deletion Time"> </at-fielderrors>
+        </div>
+      </div>
+      
+      
+     <!-- Submit/Reset Button -->
+     <div>
+      <button pButton type="submit" [disabled]="!environmentInstanceForm.valid" label="Save" icon="ui-icon-save"></button>     
+      <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!environmentInstanceForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+      </div>
+                    
+      </form>
+   </p-panel>
+   <p-growl [value]="msgs" life="5000"></p-growl>  
+    </div>

@@ -19,10 +19,10 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
         this.model = [
-            {label: 'Dashboard', icon: 'dashboard', routerLink: ['/']},
+            {label: 'Dashboard - fix', icon: 'dashboard', routerLink: ['/']},
             
             {
-                label: 'Internal Customers', icon: 'person',
+                label: 'Internal Customers - remove', icon: 'person',
                 items: [
                     {label: 'Individuals', icon: 'person', routerLink: ['/users']},   
                     {label: 'Teams', icon: 'people', routerLink: ['/teams']},  
@@ -30,14 +30,23 @@ export class AppMenuComponent implements OnInit {
                 ]
             },       
             {
-                label: 'Builds', icon: 'cloud_queue',
+                label: 'Builds - remove ', icon: 'cloud_queue',
                 items: [
                     {label: 'Manage', icon: 'edit', routerLink: ['/environments']},
                     {label: 'Env Build', icon: 'build', routerLink: ['/envinstances']},
                     {label: 'Packer', icon: 'build', routerLink: ['/builds']}
 
                 ]
-            },                 
+            },
+            {
+                label: 'AWS', icon: 'cloud_queue',
+                items: [
+                    {label: 'Regions', icon: 'edit', routerLink: ['/builds/aws/regions']},
+                    {label: 'Instance Types', icon: 'build', routerLink: ['/builds/aws/instance-types']},
+                    {label: 'Authentictions', icon: 'build', routerLink: ['/builds/aws/authentications']}
+
+                ]
+            }                 
 /*
             {
                 label: 'Themes', icon: 'palette', badge: '6',

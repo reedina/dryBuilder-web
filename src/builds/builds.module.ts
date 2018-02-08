@@ -89,6 +89,18 @@ export const ROUTES: Routes = [
   {
     path: '',
     component:  fromContainers.PackerComponent
+  },
+  {
+    path: 'aws/regions',
+    component:  fromContainers.AwsRegionsComponent
+  },
+  {
+    path: 'aws/instance-types',
+    component:  fromContainers.AwsInstanceTypesComponent
+  },
+  {
+    path: 'aws/authentications',
+    component:  fromContainers.AwsAuthenticationsComponent
   }
 ];
 @NgModule({
