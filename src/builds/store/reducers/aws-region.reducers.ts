@@ -9,20 +9,7 @@ export interface AwsRegionState {
 
 // Initial State
 export const initialState: AwsRegionState = {
-   entities: [
-    {
-      id: 1,
-      region_name:  'region_name01',
-      region: 'region 02',
-       endpoint: 'endpoint 03'
-    },
-    {
-      id: 2,
-      region_name:  'region_name04',
-      region: 'region 05',
-       endpoint: 'endpoint 06'
-    }
-  ],
+   entities: [],
   loaded: false,
   loading: false
 };

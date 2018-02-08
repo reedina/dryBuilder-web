@@ -73,7 +73,7 @@ import {TreeTableModule} from 'primeng/primeng';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule} from '@ngrx/effects';
-import { reducers } from './store';
+import { reducers, effects } from './store';
 
 
 import { PackerComponent } from './containers/packer/packer.component';
@@ -113,6 +113,7 @@ export const ROUTES: Routes = [
   HttpClientModule,
   RouterModule.forChild(ROUTES),
   StoreModule.forFeature('builds', reducers),
+  EffectsModule.forFeature(effects),
 
   AccordionModule,
   AutoCompleteModule,

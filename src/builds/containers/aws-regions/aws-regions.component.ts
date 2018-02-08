@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   styleUrls: ['aws-regions.component.css'],
   template: `
-    <app-aws-regions-display [awsRegions]="awsR$ | async"></app-aws-regions-display>
+    <app-aws-regions-display [awsRegions]="awsRegions$ | async"></app-aws-regions-display>
 
   `
 })
@@ -21,7 +21,8 @@ export class AwsRegionsComponent  implements OnInit {
   constructor(private store: Store<fromStore.BuildState>, private awsRegions: AwsRegionsService) {}
 
   ngOnInit() {
+      this.store.dispatch(new fromStore.LoadAwsRegions());
       this.awsRegions$ = this.store.select(fromStore.getAwsRegionsEntities);
-      this.awsR$ = this.awsRegions.getAwsRegions();
+      // this.awsR$ = this.awsRegions.getAwsRegions();
   }
 }
