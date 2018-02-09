@@ -17,13 +17,12 @@ export class AwsRegionsService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-  /*
-  createPizza(payload: Pizza): Observable<Pizza> {
+  createAwsRegion(payload: AwsRegion): Observable<AwsRegion> {
     return this.http
-      .post<Pizza>(`/api/pizzas`, payload)
+      .post<AwsRegion>(`http://localhost:7070/api/aws/region`, payload)
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
-
+/*
   updatePizza(payload: Pizza): Observable<Pizza> {
     return this.http
       .put<Pizza>(`/api/pizzas/${payload.id}`, payload)
