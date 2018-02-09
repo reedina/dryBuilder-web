@@ -2,14 +2,14 @@ import * as fromAwsRegions from '../actions/aws-region.actions';
 import { AwsRegion } from '../../models/aws-region.model';
 
 export interface AwsRegionState {
-   entities: AwsRegion[];
+   entities: {[id: number]: AwsRegion };
    loaded: boolean;
    loading: boolean;
 }
 
 // Initial State
 export const initialState: AwsRegionState = {
-   entities: [],
+   entities: {},
   loaded: false,
   loading: false
 };
@@ -29,8 +29,15 @@ export function reducer(
 
       case fromAwsRegions.LOAD_AWS_REGIONS_SUCCESS: {
         const regions = action.payload;
-        const entities = [...state.entities, ...regions];
-
+       // const entities = [...state.entities, ...regions];
+       const entities = regions.reduce(
+            (accum: { [id: number]: AwsRegion}, region: AwsRegion) => {
+                return {
+                    ...accum,
+                [region.id]: region
+                };
+            },  { ...state.entities }
+        );
         return {
             ...state,
             loading: false,
@@ -45,6 +52,19 @@ export function reducer(
             loading: false,
             loaded: false
         };
+      }
+
+      case fromAwsRegions.CREATE_AWS_REGION_SUCCESS: {
+          const region = action.payload;
+          const entities = {
+              ...state.entities,
+                [region.id]: region
+          };
+
+          return {
+            ...state,
+          entities
+          };
       }
     }  // end switch
     return state;

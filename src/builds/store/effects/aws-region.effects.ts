@@ -28,7 +28,19 @@ export class AwsRegionsEffects {
   })
   );
 
-
+  @Effect() // in this case we want to see the PAYLOAD
+  createAwsRegion$ = this.actions$
+   .ofType(awsRegionsActions.CREATE_AWS_REGION)
+   .pipe(
+     map((action: awsRegionsActions.CreateAwsRegion) => action.payload),
+     switchMap(region => {
+        return this.awsRegionService.createAwsRegion(region)
+        .pipe(
+               map(newRegion => new awsRegionsActions.CreateAwsRegionSuccess(newRegion)),
+               catchError(error => of(new awsRegionsActions.CreateAwsRegionFail(error)))
+        );
+     })
+   );
 
 
 

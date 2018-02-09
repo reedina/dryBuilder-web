@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { AwsRegion, AwsRegionClass } from '../../models/aws-region.model';
-import { FormStatus, FormStatusClass } from '../../models/form-status.model';
 import { MenuItem, DataTable, LazyLoadEvent } from 'primeng/primeng';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {Message} from 'primeng/primeng';
+import { _ } from 'underscore';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {Message} from 'primeng/primeng';
   styleUrls:  ['aws-regions-display.component.css'],
   templateUrl: 'aws-regions-display.component.html'
 })
-export class AwsRegionsDisplayComponent implements OnChanges, OnInit {
+export class AwsRegionsDisplayComponent implements OnChanges {
 
   awsRegion: AwsRegion =  new AwsRegionClass();
 
@@ -20,7 +20,6 @@ export class AwsRegionsDisplayComponent implements OnChanges, OnInit {
 
   awsRegionForm: FormGroup;
 
-  @Input() formSubmittedStatus: FormStatus;
   msgs: Message[] = [];
 
 
@@ -33,19 +32,18 @@ export class AwsRegionsDisplayComponent implements OnChanges, OnInit {
       });
     }
 
-    ngOnInit() {
-      this.formSubmittedStatus = new FormStatusClass();
-    }
-
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['formSubmittedStatus'] ) {
-            const chng = changes['formSubmittedStatus'];
+        if (changes['awsRegions'] ) {
+            const chng = changes['awsRegions'];
             const cur  = chng.currentValue;
-               if ( cur.submitted && cur.success) {
-                    this.showSuccess("winner");
-               } else if ( cur.submitted && cur.failed) {
-                   this.showError("bad");
-               }
+            const prev = chng.previousValue;
+            const curLength = (cur == null) ? 0 : cur.length;
+            const prevLength = (prev == null) ? 0 : prev.length;
+
+            if ((curLength - prevLength) === 1) {
+                const newElement = _.difference(cur, prev);
+                this.showSuccess(newElement[0].region);
+            }
         }
     }
 
@@ -73,21 +71,10 @@ export class AwsRegionsDisplayComponent implements OnChanges, OnInit {
 
   save(): void {
     if (this.awsRegionForm.dirty && this.awsRegionForm.valid) {
-      console.log('Attempting to Save: ' + JSON.stringify(this.awsRegionForm.value));
-      const t = Object.assign({}, this.awsRegion, this.awsRegionForm.value);
-      this.awsRegionForm.reset();
-      this.create.emit(t);
-      /*
-      this.environmentInstanceService.saveEnvironmentInstance(t)
-        .subscribe(
-           (r) => {console.log(`Successfully Saved Form: ${r.name}`);
-                   this.resp = r.name;
-                   this.updateEnvironmentInstances();
-                   this.environmentInstanceForm.reset();
-                   this.showSuccess(r.name);
-         },
-             (e) => {  this.environmentInstanceForm.reset(); this.showError(e);}
-        );*/
+        console.log('Attempting to Save: ' + JSON.stringify(this.awsRegionForm.value));
+        const t = Object.assign({}, this.awsRegion, this.awsRegionForm.value);
+        this.awsRegionForm.reset();
+        this.create.emit(t);
     }  else {
         // Remember, you only save a "valid" form
         console.log('Form not dirty and valid');

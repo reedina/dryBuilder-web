@@ -12,6 +12,12 @@ export const getAwsRegionsState = createSelector(
 
 
 export const getAwsRegionsEntities = createSelector(getAwsRegionsState, fromAwsRegions.getAwsRegionsEntities);
+export const getAllAwsRegions = createSelector(
+  getAwsRegionsEntities,
+ (entities) => {
+     return Object.keys(entities).map(id => entities[parseInt(id, 10)]);
+ }
+);
 export const getAwsRegionsLoaded = createSelector(getAwsRegionsState, fromAwsRegions.getAwsRegionsLoaded);
 export const getAwsRegionsLoading = createSelector(getAwsRegionsState, fromAwsRegions.getAwsRegionsLoading);
 
