@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AwsRegion, AwsRegionClass } from '../../models/aws-region.model';
 import { MenuItem, DataTable, LazyLoadEvent, ButtonModule } from 'primeng/primeng';
 import {TooltipModule} from 'primeng/tooltip';
@@ -23,9 +22,10 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
   @Input() awsRegions: AwsRegion[];
   @Output() create = new EventEmitter<AwsRegion>();
-
+  @Input() awsRegionEdit: AwsRegion;
+ 
   awsRegionForm: FormGroup;
-
+  awsRegionEditForm: FormGroup;
   
 
   msgs: Message[] = [];
@@ -33,7 +33,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
   @ViewChild('myanchor') myanchor;
 
   constructor(private fb: FormBuilder, private confirmationService: ConfirmationService,
-    private router: Router,private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute) {
 
     this.awsRegionForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -41,6 +41,13 @@ export class AwsRegionsDisplayComponent implements OnChanges {
       endpoint:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 
       });
+
+      this.awsRegionEditForm = this.fb.group({
+        id:  ['',  [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        name:  ['',  [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        region:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        endpoint:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        });
     }
 
 
@@ -57,6 +64,19 @@ export class AwsRegionsDisplayComponent implements OnChanges {
                 this.showSuccess(newElement[0].region);
             }
         }
+         if (changes['awsRegionEdit']) {
+            const chngEdit = changes['awsRegionEdit'];
+             let curEdit  = chngEdit.currentValue;
+             if (curEdit === undefined ) { curEdit = { id: '', name: '', region: '', endpoint: ''}; }
+                this.onResetEdit();
+                this.awsRegionEditForm.setValue({
+                        id: curEdit['id'],
+                        name: curEdit['name'],
+                        region: curEdit['region'],
+                        endpoint: curEdit['endpoint']
+                });
+         }
+
     }
 
     confirm1(region_id) {
@@ -98,7 +118,9 @@ export class AwsRegionsDisplayComponent implements OnChanges {
   onReset() {
     this.awsRegionForm.reset();
   }
-
+  onResetEdit() {
+    this.awsRegionEditForm.reset();
+  }
   save(): void {
     if (this.awsRegionForm.dirty && this.awsRegionForm.valid) {
         console.log('Attempting to Save: ' + JSON.stringify(this.awsRegionForm.value));
@@ -108,6 +130,19 @@ export class AwsRegionsDisplayComponent implements OnChanges {
     }  else {
         // Remember, you only save a "valid" form
         console.log('Form not dirty and valid');
+    }
+  }
+
+  update(): void {
+    if (this.awsRegionEditForm.dirty && this.awsRegionEditForm.valid) {
+        console.log('Attempting to Update: ' + JSON.stringify(this.awsRegionEditForm.value));
+        const t = Object.assign({}, this.awsRegion, this.awsRegionEditForm.value);
+        this.awsRegionEditForm.reset();
+        console.log(t);
+        //this.create.emit(t);
+    }  else {
+        // Remember, you only save a "valid" form
+        console.log('Edit Form not dirty and valid');
     }
   }
 }

@@ -27,3 +27,13 @@ export const getCurrentUrl = createSelector(fromRoot.getRouterState, (state) => 
 
 export const getQueryParamsEdit = createSelector(fromRoot.getRouterState, (state) =>  state.state && state.state.queryParams);
 
+
+export const getSelectedRegion = createSelector(
+  getAwsRegionsEntities ,
+  fromRoot.getRouterState,
+  (entities, router): AwsRegion => {
+    return router.state && entities[router.state.queryParams.edit];
+  }
+
+);
+

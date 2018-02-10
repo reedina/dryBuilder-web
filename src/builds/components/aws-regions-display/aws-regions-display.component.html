@@ -47,7 +47,7 @@
   <!-- End Data Table -->
 
 <div class="alltimesheets ui-g" class="panel_spacer">
-<!-- Panel for Form -->
+<!-- Panel for ADD Region Form -->
 <div id="addRegion"></div>
 <p-panel header="Add AWS Region" class="ui-g-6">
   <form [formGroup]="awsRegionForm" (ngSubmit)="save()">
@@ -95,35 +95,44 @@
 </div>
 
 <div class="alltimesheets ui-g" class="panel_spacer">
-    <!-- Panel for Form -->
+    <!-- Panel for EDIT Region Form -->
     <div id="editRegion"></div>
     <p-panel header="Edit AWS Region" class="ui-g-6">
-      <form [formGroup]="awsRegionForm" (ngSubmit)="save()">
+      <form [formGroup]="awsRegionEditForm" (ngSubmit)="update()">
+
+        <!-- Input Region ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="NameEditID" class="ui-g-12 ui-lg-2">Region ID</label>
+            <input type="text" pInputText id="RegionNameEditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="awsRegionEditForm" field="id" nicename="Region ID"> </at-fielderrors>
+            </div>
+       </div>        
     
         <!-- Input Region Name -->
         <div class="ui-g ui-lg-offset-1">
-             <label for="NameID" class="ui-g-12 ui-lg-2">Region Name</label>
-             <input type="text" pInputText id="RegionNameID" formControlName="name" placeholder="Region Name"  class="ui-g-12 ui-lg-8">
+             <label for="NameEditID" class="ui-g-12 ui-lg-2">Region Name</label>
+             <input type="text" pInputText id="RegionNameEditID" formControlName="name"  class="ui-g-12 ui-lg-8">
              <div  class="ui-g-12 ui-md-offset-2" > 
-                <at-fielderrors [form]="awsRegionForm" field="name" nicename="Region Name"> </at-fielderrors>
+                <at-fielderrors [form]="awsRegionEditForm" field="name" nicename="Region Name"> </at-fielderrors>
              </div>
         </div>
     
         <!-- Input Region -->
         <div class="ui-g ui-md-offset-1">
-              <label for="NameID" class="ui-g-12 ui-lg-2">Region</label>
-              <input type="text" pInputText id="RegionID" formControlName="region" placeholder="Region"  class="ui-g-12 ui-lg-8">
+              <label for="NameEditID" class="ui-g-12 ui-lg-2">Region</label>
+              <input type="text" pInputText id="RegionEditID" formControlName="region"  class="ui-g-12 ui-lg-8">
               <div  class="ui-g-12 ui-lg-offset-2" > 
-                 <at-fielderrors [form]="awsRegionForm" field="region" nicename="Region"> </at-fielderrors>
+                 <at-fielderrors [form]="awsRegionEditForm" field="region" nicename="Region"> </at-fielderrors>
               </div>
          </div>
     
           <!-- Input Region -->
              <div class="ui-g ui-md-offset-1">
-              <label for="NameID" class="ui-g-12 ui-lg-2">Endpoint</label>
-              <input type="text" pInputText id="EndPointID" formControlName="endpoint" placeholder="EndPoint"  class="ui-g-12 ui-lg-8">
+              <label for="NameIDEdit" class="ui-g-12 ui-lg-2">Endpoint</label>
+              <input type="text" pInputText id="EndPointEditID" formControlName="endpoint"  class="ui-g-12 ui-lg-8">
               <div  class="ui-g-12 ui-lg-offset-2" > 
-                 <at-fielderrors [form]="awsRegionForm" field="endpoint" nicename="EndPoint"> </at-fielderrors>
+                 <at-fielderrors [form]="awsRegionEditForm" field="endpoint" nicename="EndPoint"> </at-fielderrors>
               </div>
          </div>  
     
@@ -133,9 +142,9 @@
         
        <!-- Submit/Reset Button -->
        <div class="ui-g ui-lg-offset-1">
-        <button pButton type="submit" [disabled]="!awsRegionForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+        <button pButton type="submit" [disabled]="!awsRegionEditForm.dirty || !awsRegionEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
          
-        <button (click)="onReset()" pButton type="reset" [disabled]="!awsRegionForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!awsRegionEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
       </div> 
                       
         </form>
