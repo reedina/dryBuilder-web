@@ -7,9 +7,9 @@
       </div>
   
     <!-- Data Table -->    
-    <p-dataTable #dt [value]="awsRegions" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No instances found"
+    <p-dataTable #dt [value]="awsRegions" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No regions found"
     [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="env_instances"
-     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
   
      <p-column field="id" header="Id" [sortable]="true" >
       </p-column>
