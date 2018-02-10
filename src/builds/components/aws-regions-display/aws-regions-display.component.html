@@ -8,17 +8,31 @@
   
     <!-- Data Table -->    
     <p-dataTable #dt [value]="awsRegions" class="ui-g-12 ui-lg-8" sortField="name" sortOrder="1" emptyMessage="No instances found"
-    [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
-     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="env_instances"
+     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
   
-     <p-column field="id" header="Id" [sortable]="true"></p-column>
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
         <p-column field="name" header="Region Name" [sortable]="true" ></p-column>
         <p-column field="region" header="Region" [sortable]="true" ></p-column>
         <p-column field="endpoint" header="End Point" [sortable]="true" ></p-column>      
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+              <span id='clickableAwesomeFont' (click)="confirm1(row.region)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x"></i></span>
+              <span id='clickableAwesomeFont' (click)="confirm2(row.region)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
         <p-footer>
             <label for="tableSearch">Search: </label>
             <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
-            <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
             
           </p-footer>
   
@@ -61,11 +75,13 @@
       
      <!-- Submit/Reset Button -->
      <div>
-      <button pButton type="submit" [disabled]="!awsRegionForm.valid" label="Save" icon="ui-icon-save"></button>     
-      <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!awsRegionForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+      <button pButton type="submit" [disabled]="!awsRegionForm.valid" label="Save" icon="fa-floppy-o"></button>     
+      <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!awsRegionForm.dirty" label="Erase" icon="fa-eraser"></button> </span>
       </div>
                     
       </form>
    </p-panel>
    <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
     </div>
+    <p-confirmDialog></p-confirmDialog>

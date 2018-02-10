@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { AwsRegion, AwsRegionClass } from '../../models/aws-region.model';
-import { MenuItem, DataTable, LazyLoadEvent } from 'primeng/primeng';
+import { MenuItem, DataTable, LazyLoadEvent, ButtonModule } from 'primeng/primeng';
+import {TooltipModule} from 'primeng/tooltip';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {Message} from 'primeng/primeng';
 import { _ } from 'underscore';
@@ -9,7 +12,8 @@ import { _ } from 'underscore';
 @Component({
   selector: 'app-aws-regions-display',
   styleUrls:  ['aws-regions-display.component.css'],
-  templateUrl: 'aws-regions-display.component.html'
+  templateUrl: 'aws-regions-display.component.html',
+  providers: [ConfirmationService]
 })
 export class AwsRegionsDisplayComponent implements OnChanges {
 
@@ -20,10 +24,12 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
   awsRegionForm: FormGroup;
 
+  
+
   msgs: Message[] = [];
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private confirmationService: ConfirmationService) {
     this.awsRegionForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       region:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -47,6 +53,32 @@ export class AwsRegionsDisplayComponent implements OnChanges {
         }
     }
 
+    confirm1(region) {
+      this.confirmationService.confirm({
+          message: `Do you want to edit: <b> ${region} </b>`,
+          header: 'Edit Confirmation',
+          icon: 'fa fa-pencil',
+          accept: () => {
+              this.msgs = [{severity:'warn', summary:'Confirmed', detail:`Editing: <b>${region}</b>`}];
+          },
+          reject: () => {
+              this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Editing: <b>${region}</b>`}];
+          }
+      });
+  }
+    confirm2(region) {
+      this.confirmationService.confirm({
+          message: `Do you want to delete: <b> ${region} </b>`,
+          header: 'Delete Confirmation',
+          icon: 'fa fa-trash',
+          accept: () => {
+              this.msgs = [{severity:'error', summary:'Confirmed', detail:`Deleting: <b>${region}</b>`}];
+          },
+          reject: () => {
+              this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Deleting: <b>${region}</b>`}];
+          }
+      });
+  }
   showError(message: string) {
     this.msgs = [];
     this.msgs.push({severity: 'error', summary: 'Error Message', detail: message});

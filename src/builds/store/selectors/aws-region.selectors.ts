@@ -22,4 +22,8 @@ export const getAwsRegionsLoaded = createSelector(getAwsRegionsState, fromAwsReg
 export const getAwsRegionsLoading = createSelector(getAwsRegionsState, fromAwsRegions.getAwsRegionsLoading);
 
 
+export const getCurrentUrl = createSelector(fromRoot.getRouterState, (state) =>  state.state && state.state.url);
+
+
+export const getQueryParamsEdit = createSelector(fromRoot.getRouterState, (state) =>  state.state && state.state.queryParams);
 

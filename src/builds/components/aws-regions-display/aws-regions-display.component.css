@@ -52,3 +52,7 @@ button {
 .ui-dropdown    {
   width:100% !important;
 }
+#clickableAwesomeFont {
+  cursor: pointer;
+  margin: 10px;
+}

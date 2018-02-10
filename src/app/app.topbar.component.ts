@@ -28,7 +28,7 @@ import {AppComponent} from './app.component';
                         [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
                         
                         <button type="button" pButton label={{user}}
-                        icon="ui-icon-person" 
+                        icon="fa-user" 
                         (click)="app.onTopbarItemClick($event,profile)"></button>
 
                         <!-- <a href="#" (click)="app.onTopbarItemClick($event,profile)">

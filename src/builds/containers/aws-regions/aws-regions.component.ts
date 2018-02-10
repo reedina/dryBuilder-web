@@ -21,6 +21,7 @@ export class AwsRegionsComponent  implements OnInit {
   ngOnInit() {
       this.store.dispatch(new fromStore.LoadAwsRegions());
       this.awsRegions$ = this.store.select(fromStore.getAllAwsRegions);
+       this.store.select(fromStore.getQueryParamsEdit).subscribe(x => console.log(x));
   }
 
   submitForm(awsRegion: AwsRegion) {
