@@ -52,7 +52,18 @@ button {
 .ui-dropdown    {
   width:100% !important;
 }
+
 #clickableAwesomeFont {
   cursor: pointer;
   margin: 10px;
 }
+
+
+.button_spacer {
+  margin: 5px;
+}
+.panel_spacer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
