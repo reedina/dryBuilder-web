@@ -70,6 +70,7 @@ import {TooltipModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule} from '@ngrx/effects';
@@ -114,6 +115,7 @@ export const ROUTES: Routes = [
   RouterModule.forChild(ROUTES),
   StoreModule.forFeature('builds', reducers),
   EffectsModule.forFeature(effects),
+  Ng2PageScrollModule,
 
   AccordionModule,
   AutoCompleteModule,

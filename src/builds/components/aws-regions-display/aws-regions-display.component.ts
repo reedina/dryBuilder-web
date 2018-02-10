@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AwsRegion, AwsRegionClass } from '../../models/aws-region.model';
 import { MenuItem, DataTable, LazyLoadEvent, ButtonModule } from 'primeng/primeng';
 import {TooltipModule} from 'primeng/tooltip';
@@ -28,8 +30,11 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
   msgs: Message[] = [];
 
+  @ViewChild('myanchor') myanchor;
 
-  constructor(private fb: FormBuilder, private confirmationService: ConfirmationService) {
+  constructor(private fb: FormBuilder, private confirmationService: ConfirmationService,
+    private router: Router,private route: ActivatedRoute) {
+
     this.awsRegionForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       region:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -37,6 +42,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
       });
     }
+
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['awsRegions'] ) {
@@ -53,19 +59,10 @@ export class AwsRegionsDisplayComponent implements OnChanges {
         }
     }
 
-    confirm1(region) {
-      this.confirmationService.confirm({
-          message: `Do you want to edit: <b> ${region} </b>`,
-          header: 'Edit Confirmation',
-          icon: 'fa fa-pencil',
-          accept: () => {
-              this.msgs = [{severity:'warn', summary:'Confirmed', detail:`Editing: <b>${region}</b>`}];
-          },
-          reject: () => {
-              this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Editing: <b>${region}</b>`}];
-          }
-      });
-  }
+    confirm1(region_id) {
+        this.router.navigate(['/builds/aws/regions'], { queryParams:  {edit: region_id}} );
+    }
+
     confirm2(region) {
       this.confirmationService.confirm({
           message: `Do you want to delete: <b> ${region} </b>`,
@@ -73,6 +70,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
           icon: 'fa fa-trash',
           accept: () => {
               this.msgs = [{severity:'error', summary:'Confirmed', detail:`Deleting: <b>${region}</b>`}];
+              this.router.navigate(['/builds/aws/regions' ]);
           },
           reject: () => {
               this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Deleting: <b>${region}</b>`}];

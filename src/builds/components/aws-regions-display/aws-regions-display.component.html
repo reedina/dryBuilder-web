@@ -20,8 +20,11 @@
           <ng-template  let-row="rowData" pTemplate="body"> 
             
             <div>
-              <span id='clickableAwesomeFont' (click)="confirm1(row.region)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x"></i></span>
+                <a pageScroll href="#editRegion"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
               <span id='clickableAwesomeFont' (click)="confirm2(row.region)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
           </div>
             
            
@@ -45,7 +48,8 @@
 
 <div class="alltimesheets ui-g" class="panel_spacer">
 <!-- Panel for Form -->
-<p-panel header="Add AWS Region" class="ui-g-12">
+<div id="addRegion"></div>
+<p-panel header="Add AWS Region" class="ui-g-6">
   <form [formGroup]="awsRegionForm" (ngSubmit)="save()">
 
     <!-- Input Region Name -->
@@ -90,6 +94,53 @@
  </p-panel>
 </div>
 
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for Form -->
+    <div id="editRegion"></div>
+    <p-panel header="Edit AWS Region" class="ui-g-6">
+      <form [formGroup]="awsRegionForm" (ngSubmit)="save()">
+    
+        <!-- Input Region Name -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="NameID" class="ui-g-12 ui-lg-2">Region Name</label>
+             <input type="text" pInputText id="RegionNameID" formControlName="name" placeholder="Region Name"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="awsRegionForm" field="name" nicename="Region Name"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input Region -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="NameID" class="ui-g-12 ui-lg-2">Region</label>
+              <input type="text" pInputText id="RegionID" formControlName="region" placeholder="Region"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsRegionForm" field="region" nicename="Region"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input Region -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="NameID" class="ui-g-12 ui-lg-2">Endpoint</label>
+              <input type="text" pInputText id="EndPointID" formControlName="endpoint" placeholder="EndPoint"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsRegionForm" field="endpoint" nicename="EndPoint"> </at-fielderrors>
+              </div>
+         </div>  
+    
+       
+       
+        
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!awsRegionForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onReset()" pButton type="reset" [disabled]="!awsRegionForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
 <div>
 <p-confirmDialog></p-confirmDialog>
 </div>
