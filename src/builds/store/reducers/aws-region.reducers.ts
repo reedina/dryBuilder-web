@@ -67,6 +67,20 @@ export function reducer(
           entities
           };
       }
+
+      case fromAwsRegions.REMOVE_AWS_REGION_SUCCESS: {
+        const region = action.payload;
+        // [region.id]: removed will destructure our region.id out
+        // ...entities will be the remaining entities that were not destructured
+        const { [region.id]: removed, ...entities}  = state.entities;
+
+        return {
+
+          ...state,
+          entities
+        };
+      }
+
     }  // end switch
     return state;
 }

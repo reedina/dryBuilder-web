@@ -23,6 +23,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
   @Input() awsRegions: AwsRegion[];
   @Output() create = new EventEmitter<AwsRegion>();
   @Output() updateAwsRegion = new EventEmitter<AwsRegion>();
+  @Output() remove = new EventEmitter<AwsRegion>();
   @Input() awsRegionEdit: AwsRegion;
  
   awsRegionForm: FormGroup;
@@ -91,15 +92,16 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
     confirm2(region) {
       this.confirmationService.confirm({
-          message: `Do you want to delete: <b> ${region} </b>`,
+          message: `Do you want to delete: <b> ${region.region} </b>`,
           header: 'Delete Confirmation',
           icon: 'fa fa-trash',
           accept: () => {
-              this.msgs = [{severity:'error', summary:'Confirmed', detail:`Deleting: <b>${region}</b>`}];
+              this.msgs = [{severity:'error', summary:'Confirmed', detail:`Deleting: <b>${region.region}</b>`}];
               this.router.navigate(['/builds/aws/regions' ]);
+              this.remove.emit(region);
           },
           reject: () => {
-              this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Deleting: <b>${region}</b>`}];
+              this.msgs = [{severity:'info', summary:'Cancelled', detail:`Not Deleting: <b>${region.region}</b>`}];
           }
       });
   }

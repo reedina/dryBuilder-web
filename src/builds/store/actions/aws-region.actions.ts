@@ -59,6 +59,28 @@ export class UpdateAwsRegionSuccess implements Action {
     readonly type = UPDATE_AWS_REGION_SUCCESS;
     constructor(public payload: AwsRegion) {}
 }
+
+// REMOVE AWS_REGION
+export const REMOVE_AWS_REGION = '[Builds] Remove AWS Region';
+export const REMOVE_AWS_REGION_FAIL = '[Builds] Remove AWS Region Fail';
+export const REMOVE_AWS_REGION_SUCCESS = '[Builds] Remove AWS Region Success';
+
+export class RemoveAwsRegion implements Action {
+readonly type = REMOVE_AWS_REGION;
+ constructor(public payload: AwsRegion) {}
+}
+
+export class RemoveAwsRegionFail implements Action {
+   readonly type = REMOVE_AWS_REGION_FAIL;
+    constructor(public payload: any) { }
+}
+
+export class RemoveAwsRegionSuccess implements Action {
+
+  readonly type = REMOVE_AWS_REGION_SUCCESS;
+  constructor(public payload: AwsRegion) {}
+}
+
 // ACTION TYPES
 export type AwsRegionsActions =
  | LoadAwsRegions
@@ -69,4 +91,7 @@ export type AwsRegionsActions =
  | CreateAwsRegionFail
  | UpdateAwsRegion
  | UpdateAwsRegionFail
- | UpdateAwsRegionSuccess;
+ | UpdateAwsRegionSuccess
+ | RemoveAwsRegion
+ | RemoveAwsRegionFail
+ | RemoveAwsRegionSuccess;

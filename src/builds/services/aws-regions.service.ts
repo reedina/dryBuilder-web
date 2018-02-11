@@ -29,11 +29,11 @@ export class AwsRegionsService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-/*
-  removePizza(payload: Pizza): Observable<Pizza> {
+
+  removeAwsRegion(payload: AwsRegion): Observable<AwsRegion> {
     return this.http
-      .delete<any>(`/api/pizzas/${payload.id}`)
+      .delete<any>(`http://localhost:7070/api/aws/region/${payload.id}`)
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
-  */
+
 }

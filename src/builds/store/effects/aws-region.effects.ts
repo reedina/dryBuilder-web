@@ -56,5 +56,20 @@ export class AwsRegionsEffects {
       })
     );
 
+    @Effect()
+    removeAwsRegion$ = this.actions$
+    .ofType(awsRegionsActions.REMOVE_AWS_REGION)
+    .pipe(
+      map((action: awsRegionsActions.RemoveAwsRegion) => action.payload),
+      switchMap((region) => {
+          return this.awsRegionService
+           .removeAwsRegion(region)
+           .pipe(
+              map(() => new awsRegionsActions.RemoveAwsRegionSuccess(region)),
+              catchError(error => of(new awsRegionsActions.RemoveAwsRegionFail(error)))
+           );
+      })
+    );
+
 
 }
