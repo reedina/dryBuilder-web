@@ -12,7 +12,8 @@ import { Observable } from 'rxjs/Observable';
     <app-aws-regions-display
         [awsRegions]="awsRegions$ | async"
         (create)="submitForm($event)"
-        [awsRegionEdit]="awsRegion$ | async">
+        [awsRegionEdit]="awsRegion$ | async"
+        (updateAwsRegion)="updateForm($event)">
     </app-aws-regions-display>
   `
 })
@@ -32,5 +33,9 @@ export class AwsRegionsComponent  implements OnInit {
 
   submitForm(awsRegion: AwsRegion) {
     this.store.dispatch(new fromStore.CreateAwsRegion(awsRegion));
+  }
+
+  updateForm(awsRegion: AwsRegion) {
+    this.store.dispatch(new fromStore.UpdateAwsRegion(awsRegion));
   }
 }

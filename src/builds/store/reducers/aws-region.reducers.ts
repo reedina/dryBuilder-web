@@ -54,7 +54,8 @@ export function reducer(
         };
       }
 
-      case fromAwsRegions.CREATE_AWS_REGION_SUCCESS: {
+      case fromAwsRegions.CREATE_AWS_REGION_SUCCESS:
+      case fromAwsRegions.UPDATE_AWS_REGION_SUCCESS: {
           const region = action.payload;
           const entities = {
               ...state.entities,

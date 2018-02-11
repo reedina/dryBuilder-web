@@ -42,6 +42,19 @@ export class AwsRegionsEffects {
      })
    );
 
+   @Effect()
+   updateAwsRegion$ = this.actions$
+    .ofType(awsRegionsActions.UPDATE_AWS_REGION)
+    .pipe(
+      map((action: awsRegionsActions.UpdateAwsRegion) => action.payload),
+      switchMap(region => {
+          return this.awsRegionService.updateAwsRegion(region)
+          .pipe(
+              map(region_response => new awsRegionsActions.UpdateAwsRegionSuccess(region_response)),
+              catchError(error => of(new awsRegionsActions.UpdateAwsRegionFail(error)))
+          );
+      })
+    );
 
 
 }

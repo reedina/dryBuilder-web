@@ -22,13 +22,14 @@ export class AwsRegionsService {
       .post<AwsRegion>(`http://localhost:7070/api/aws/region`, payload)
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
-/*
-  updatePizza(payload: Pizza): Observable<Pizza> {
+
+  updateAwsRegion(payload: AwsRegion): Observable<AwsRegion> {
     return this.http
-      .put<Pizza>(`/api/pizzas/${payload.id}`, payload)
+      .put<AwsRegion>(`http://localhost:7070/api/aws/region/${payload.id}`, payload)
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+/*
   removePizza(payload: Pizza): Observable<Pizza> {
     return this.http
       .delete<any>(`/api/pizzas/${payload.id}`)

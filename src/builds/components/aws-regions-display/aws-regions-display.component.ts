@@ -22,6 +22,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
   @Input() awsRegions: AwsRegion[];
   @Output() create = new EventEmitter<AwsRegion>();
+  @Output() updateAwsRegion = new EventEmitter<AwsRegion>();
   @Input() awsRegionEdit: AwsRegion;
  
   awsRegionForm: FormGroup;
@@ -61,7 +62,11 @@ export class AwsRegionsDisplayComponent implements OnChanges {
 
             if ((curLength - prevLength) === 1) {
                 const newElement = _.difference(cur, prev);
-                this.showSuccess(newElement[0].region);
+                this.showSuccess('Added', newElement[0].region);
+            }
+            if (curLength > 0 && (curLength - prevLength) === 0) {
+                const changedElement = _.difference(cur, prev);
+                this.showSuccess('Updated', changedElement[0].region);
             }
         }
          if (changes['awsRegionEdit']) {
@@ -102,14 +107,14 @@ export class AwsRegionsDisplayComponent implements OnChanges {
     this.msgs.push({severity: 'error', summary: 'Error Message', detail: message});
   }
 
-  showSuccess(name: string) {
+  showSuccess(type: string, name: string) {
     this.msgs = [];
-    this.msgs.push({severity: 'success', summary: 'Success', detail: `Added ${this.truncate(name)}`});
+    this.msgs.push({severity: 'success', summary: 'Success', detail: `${type}: ${this.truncate(name)}`});
   }
 
   truncate(string: string) {
-      if (string.length > 10) {
-        return string.substring(0, 10) + '...';
+      if (string.length > 15) {
+        return string.substring(0, 15) + '...';
       } else {
         return string;
       }
@@ -138,8 +143,9 @@ export class AwsRegionsDisplayComponent implements OnChanges {
         console.log('Attempting to Update: ' + JSON.stringify(this.awsRegionEditForm.value));
         const t = Object.assign({}, this.awsRegion, this.awsRegionEditForm.value);
         this.awsRegionEditForm.reset();
+        this.router.navigate(['/builds/aws/regions' ]);
         console.log(t);
-        //this.create.emit(t);
+        this.updateAwsRegion.emit(t);
     }  else {
         // Remember, you only save a "valid" form
         console.log('Edit Form not dirty and valid');

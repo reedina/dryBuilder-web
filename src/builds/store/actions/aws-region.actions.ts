@@ -40,7 +40,25 @@ export class CreateAwsRegionSuccess implements Action {
   constructor(public payload: AwsRegion) {}
 }
 
+// UPDATE AWS REGION
+export const UPDATE_AWS_REGION = '[Builds] Update AWS Region';
+export const UPDATE_AWS_REGION_FAIL = '[Builds] Update AWS Region Fail';
+export const UPDATE_AWS_REGION_SUCCESS = '[Builds] Update AWS REGION Success';
 
+export class UpdateAwsRegion implements Action {
+readonly type = UPDATE_AWS_REGION;
+constructor(public payload: AwsRegion) {}
+}
+
+export class UpdateAwsRegionFail implements Action {
+    readonly type = UPDATE_AWS_REGION_FAIL;
+    constructor(public payload: any) {}
+}
+
+export class UpdateAwsRegionSuccess implements Action {
+    readonly type = UPDATE_AWS_REGION_SUCCESS;
+    constructor(public payload: AwsRegion) {}
+}
 // ACTION TYPES
 export type AwsRegionsActions =
  | LoadAwsRegions
@@ -48,4 +66,7 @@ export type AwsRegionsActions =
  | LoadAwsRegionsSuccess
  | CreateAwsRegion
  | CreateAwsRegionSuccess
- | CreateAwsRegionFail;
+ | CreateAwsRegionFail
+ | UpdateAwsRegion
+ | UpdateAwsRegionFail
+ | UpdateAwsRegionSuccess;
