@@ -64,16 +64,17 @@ export class AwsRegionsDisplayComponent implements OnChanges {
                 const newElement = _.difference(cur, prev);
                 this.showSuccess('Added', newElement[0].region);
             }
-            if (curLength > 0 && (curLength - prevLength) === 0) {
+            if (curLength > 1 && (curLength - prevLength) === 0) {
                 const changedElement = _.difference(cur, prev);
-                this.showSuccess('Updated', changedElement[0].region);
+                if (changedElement.length === 1) {   // Silly hack to fix issue;  Move to Store
+                    this.showSuccess('Updated', changedElement[0].region);
+                }
             }
         }
          if (changes['awsRegionEdit']) {
             const chngEdit = changes['awsRegionEdit'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', name: '', region: '', endpoint: ''}; }
-                this.onResetEdit();
                 this.awsRegionEditForm.setValue({
                         id: curEdit['id'],
                         name: curEdit['name'],
@@ -125,6 +126,7 @@ export class AwsRegionsDisplayComponent implements OnChanges {
   }
   onResetEdit() {
     this.awsRegionEditForm.reset();
+    this.router.navigate(['/builds/aws/regions' ]);
   }
   save(): void {
     if (this.awsRegionForm.dirty && this.awsRegionForm.valid) {
@@ -144,7 +146,6 @@ export class AwsRegionsDisplayComponent implements OnChanges {
         const t = Object.assign({}, this.awsRegion, this.awsRegionEditForm.value);
         this.awsRegionEditForm.reset();
         this.router.navigate(['/builds/aws/regions' ]);
-        console.log(t);
         this.updateAwsRegion.emit(t);
     }  else {
         // Remember, you only save a "valid" form
