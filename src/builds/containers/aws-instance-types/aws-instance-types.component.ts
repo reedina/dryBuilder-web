@@ -1,5 +1,6 @@
+import { AwsInstanceTypesService } from '../../services/aws-instance-types.service';
 import { Component, OnInit } from '@angular/core';
-import { PackerTemplate } from '../../models/packer-template.model';
+import { AwsInstanceType } from '../../models/aws-instance-type.model';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
@@ -8,25 +9,38 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   styleUrls: ['aws-instance-types.component.css'],
   template: `
-    <app-aws-instance-types-display></app-aws-instance-types-display>
-    <div>Hello from builds component</div>
-
-        <div *ngFor="let template of (packerTemplates$ | async); let i = index">
-                  Packer Template Friendly Name: <b>{{ template.friendly_name}}</b>
-                  <div *ngFor="let build of template.builders; let i = index">
-                           Builder Friendly Name: {{ build.friendly_name }}
-                  </div>
-        </div>
+    <app-aws-instance-types-display
+        [awsInstanceTypes]="awsInstanceTypes$ | async"
+        (create)="submitForm($event)"
+        [awsInstanceTypeEdit]="awsInstanceType$ | async"
+        (updateAwsInstanceType)="updateForm($event)"
+        (remove)="onRemove($event)">
+    </app-aws-instance-types-display>
   `
 })
 export class AwsInstanceTypesComponent  implements OnInit {
 
-  packerTemplates$: Observable<PackerTemplate[]>;
+  awsInstanceTypes$: Observable<AwsInstanceType[]>;
+  awsInstanceType$: Observable<AwsInstanceType>;
 
-  constructor(private store: Store<fromStore.BuildState>) {}
+  constructor(private store: Store<fromStore.BuildState>, private awsInstanceTypes: AwsInstanceTypesService) {}
 
   ngOnInit() {
-     console.log(this.store.select('packer'));
-     this.packerTemplates$ = this.store.select(fromStore.getPackerTemplateEntities);
+      this.store.dispatch(new fromStore.LoadAwsInstanceTypes());
+      this.awsInstanceTypes$ = this.store.select(fromStore.getAllAwsInstanceTypes);
+      this.awsInstanceType$ = this.store.select(fromStore.getSelectedInstanceType);
+      // this.store.select(fromStore.getQueryParamsEdit).subscribe(x => console.log(x.edit));
+  }
+
+  submitForm(awsInstanceType: AwsInstanceType) {
+    this.store.dispatch(new fromStore.CreateAwsInstanceType(awsInstanceType));
+  }
+
+  updateForm(awsInstanceType: AwsInstanceType) {
+    this.store.dispatch(new fromStore.UpdateAwsInstanceType(awsInstanceType));
+  }
+
+  onRemove(awsInstanceType: AwsInstanceType) {
+    this.store.dispatch(new fromStore.RemoveAwsInstanceType(awsInstanceType));
   }
 }

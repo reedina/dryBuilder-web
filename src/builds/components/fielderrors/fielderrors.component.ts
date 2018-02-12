@@ -21,6 +21,7 @@ export class FielderrorsComponent implements OnInit {
   fieldErrors(field: string) {    
     let controlState = this.form.controls[field];
     return (controlState.dirty && controlState.errors) ? controlState.errors : null;
+    
   }
 
 

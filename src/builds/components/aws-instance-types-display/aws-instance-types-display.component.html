@@ -7,75 +7,171 @@
       </div>
   
     <!-- Data Table -->    
-    <p-dataTable #dt [value]="environmentInstances" class="ui-g-12 ui-lg-8" sortField="name" sortOrder="1" emptyMessage="No instances found"
-    [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
-     [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+    <p-dataTable #dt [value]="awsInstanceTypes" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No instance types found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="aws_instance_types"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
   
-        <p-column field="id" header="Id"></p-column> 
-        <p-column field="name" header="Name" [sortable]="true" ></p-column>
-        <p-column field="deletion_time" header="Deletion Time" [sortable]="true" ></p-column>
-        <p-column field="environment.name" header="Environment Name" [sortable]="true" ></p-column>
-        <p-column field="environment.type" header="Environment Type" [sortable]="true" ></p-column>
-        <p-column field="team.name" header="Team Name" [sortable]="true" ></p-column>      
-        <p-column field="project.name" header="Project Name" [sortable]="true" ></p-column>        
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="category" header="Category" [sortable]="true" ></p-column>
+        <p-column field="type" header="Type" [sortable]="true" ></p-column>
+        <p-column field="vcpu" header="Virtual CPU" [sortable]="true" ></p-column>   
+        <p-column field="memory_gb" header="Memory GB" [sortable]="true" ></p-column>       
+        
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#editInstanceType"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
         <p-footer>
             <label for="tableSearch">Search: </label>
             <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
-            <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
             
           </p-footer>
   
     </p-dataTable>
   
-  <!-- Panel for Form -->
-  <p-panel header="Create Packer Template" class="ui-g-12 ui-lg-4">
-    <form [formGroup]="environmentInstanceForm" (ngSubmit)="save()">
-  
-      <!-- Input Name -->
-      <div class="ui-g">
-           <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
-           <input type="text" pInputText id="NameID" formControlName="name" placeholder="My Instance"  class="ui-g-12 ui-lg-10">
-           <div  class="ui-g-12" > 
-              <at-fielderrors [form]="environmentInstanceForm" field="name" nicename="Name"> </at-fielderrors>
-           </div>
-      </div>
-  
-      <!-- Select Environment -->
-      <div class="ui-g">
-        <label for="EnvironmentID" class="ui-g-12 ui-lg-2">Environment</label>
-        <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="EnvironmentID" formControlName="environment" [options]="environmentsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
-      </div>    
-  
-       <!-- Select Team -->
-       <div class="ui-g">
-       <label for="TeamID" class="ui-g-12 ui-lg-2">Team</label>
-         <p-dropdown  (onChange)="createProjectsDropdown($event)" autoWidth="true"  [style]="{'width': '100%'}" id="TeamID" formControlName="team" [options]="teamsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
-       </div>  
-  
-            <!-- Select Project -->
-        <div class="ui-g">
-          <label for="ProjectID" class="ui-g-12 ui-lg-2">Project</label>
-           <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="ProjectID" formControlName="project" [options]="projectsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
-         </div> 
-  
-      <!-- Input Deletion Time -->
-      <div class="ui-g">
-        <label for="DeletionTimeID" class="ui-g-12 ui-lg-2">Deletion Time</label>
-        <p-calendar [showIcon]="true" id="deletionTimeID" showTime="true" formControlName="deletion_time" dateFormat="mm/dd/yy" class="ui-g-12 ui-lg-10" [minDate]="minDeleteDate"></p-calendar>
-        <!--<input type="text" pInputText id="DeletionTimeID" formControlName="deletion_time" placeholder="Doe"  class="ui-g-12 ui-lg-10"> -->
-        <div  class="ui-g-12" > 
-           <at-fielderrors [form]="environmentInstanceForm" field="deletion_time" nicename="Deletion Time"> </at-fielderrors>
-        </div>
-      </div>
-      
-      
-     <!-- Submit/Reset Button -->
-     <div>
-      <button pButton type="submit" [disabled]="!environmentInstanceForm.valid" label="Save" icon="ui-icon-save"></button>     
-      <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!environmentInstanceForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
-      </div>
-                    
-      </form>
-   </p-panel>
-   <p-growl [value]="msgs" life="5000"></p-growl>  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD InstanceType Form -->
+<div id="addInstanceType"></div>
+<p-panel header="Add AWS InstanceType" class="ui-g-6">
+  <form [formGroup]="awsInstanceTypeForm" (ngSubmit)="save()">
+
+    <!-- Input Category -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="NameID" class="ui-g-12 ui-lg-2">Category</label>
+         <input type="text" pInputText id="CategoryID" formControlName="category" placeholder="Category"  class="ui-g-12 ui-lg-8">
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="awsInstanceTypeForm" field="category" nicename="Category"> </at-fielderrors>
+         </div>
     </div>
+
+    <!-- Input Type -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="NameID" class="ui-g-12 ui-lg-2">Type</label>
+          <input type="text" pInputText id="TypeID" formControlName="type" placeholder="Type"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="awsInstanceTypeForm" field="type" nicename="Type"> </at-fielderrors>
+          </div>
+     </div>
+
+      <!-- Input Vcpu -->
+         <div class="ui-g ui-md-offset-1">
+          <label for="NameID" class="ui-g-12 ui-lg-2">Virtual CPU</label>
+          <!-- <input type="text" pInputText id="VcpuID" formControlName="vcpu" placeholder="Vcpu"  class="ui-g-12 ui-lg-8"> -->
+          <p-spinner size="30" id="VcpuID" formControlName="vcpu" [min]="1" [max]="50" class="ui-g-12 ui-lg-8"></p-spinner>
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="awsInstanceTypeForm" field="vcpu" nicename="Vcpu"> </at-fielderrors>
+          </div>
+     </div>  
+
+       <!-- Input Memory_GB -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="NameID" class="ui-g-12 ui-lg-2">Memory GB</label>
+        <p-spinner size="30" id="MemoryGBID" formControlName="memory_gb" [min]="1" [max]="50" class="ui-g-12 ui-lg-8"></p-spinner>
+        <!-- <input type="text" pInputText id="MemoryGBID" formControlName="memory_gb" placeholder="Memory GB"  class="ui-g-12 ui-lg-8"> -->
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="awsInstanceTypeForm" field="memory_gb" nicename="Memory GB"> </at-fielderrors>
+        </div>
+   </div>   
+   
+    
+    
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!awsInstanceTypeForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!awsInstanceTypeForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+                  
+    </form>
+ </p-panel>
+</div>
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT InstanceType Form -->
+    <div id="editInstanceType"></div>
+    <p-panel header="Edit AWS InstanceType" class="ui-g-6">
+      <form [formGroup]="awsInstanceTypeEditForm" (ngSubmit)="update()">
+
+        <!-- Input InstanceType ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="NameEditID" class="ui-g-12 ui-lg-2">ID</label>
+            <input type="text" pInputText id="EditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="awsInstanceTypeEditForm" field="id" nicename="InstanceType ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input Category -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="NameEditID" class="ui-g-12 ui-lg-2">Category</label>
+             <input type="text" pInputText id="CategoryEditID" formControlName="category"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="awsInstanceTypeEditForm" field="category" nicename="Categoy"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input Type -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="NameEditID" class="ui-g-12 ui-lg-2">Type</label>
+              <input type="text" pInputText id="InstanceTypeEditID" formControlName="type"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsInstanceTypeEditForm" field="type" nicename="Type"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input Vcpu -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="NameIDEdit" class="ui-g-12 ui-lg-2">Virtual CPU</label>
+              <p-spinner size="30" id="VcpuEditID" formControlName="vcpu" [min]="1" [max]="50" class="ui-g-12 ui-lg-8"></p-spinner>
+              <!-- <input type="text" pInputText id="VcpuEditID" formControlName="vcpu"  class="ui-g-12 ui-lg-8"> -->
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsInstanceTypeEditForm" field="vcpu" nicename="Vcpu"> </at-fielderrors>
+              </div>
+         </div>  
+    
+            <!-- Input Memory GB -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="NameIDEdit" class="ui-g-12 ui-lg-2">Memory GB</label>
+              <p-spinner size="30" id="MemoryGBEditID" formControlName="memory_gb" [min]="1" [max]="50" class="ui-g-12 ui-lg-8"></p-spinner>
+              <!-- <input type="text" pInputText id="MemoryGBEditID" formControlName="memory_gb"  class="ui-g-12 ui-lg-8"> -->
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsInstanceTypeEditForm" field="memory_gb" nicename="Memory GB"> </at-fielderrors>
+              </div>
+         </div>  
+         
+       
+        
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!awsInstanceTypeEditForm.dirty || !awsInstanceTypeEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!awsInstanceTypeEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+

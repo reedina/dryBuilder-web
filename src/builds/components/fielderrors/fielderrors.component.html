@@ -3,6 +3,8 @@
       <span *ngIf="fieldErrors(fieldName).required">{{ niceName}} is required! &nbsp;</span>
       <span *ngIf="fieldErrors(fieldName).minlength">{{ niceName}} must be {{ fieldErrors(fieldName).minlength.requiredLength }} characters! &nbsp;</span>
       <span *ngIf="fieldErrors(fieldName).maxlength">{{ niceName}} must not exceed {{ fieldErrors(fieldName).maxlength.requiredLength }} characters! &nbsp;</span>
+      <span *ngIf="fieldErrors(fieldName).min">{{ niceName}} must be at min {{ fieldErrors(fieldName).min.min }} ! &nbsp;</span>
+      <span *ngIf="fieldErrors(fieldName).max">{{ niceName}} must be at max {{ fieldErrors(fieldName).max.max }} ! &nbsp;</span>
       <span *ngIf="fieldErrors(fieldName).pattern">{{ niceName}} does not match an acceptabled pattern! &nbsp; </span>      
     
 </div>
