@@ -104,7 +104,7 @@ export const ROUTES: Routes = [
   },
   {
     path: 'aws/authentications',
-    component:  fromContainers.AwsAuthenticationsComponent
+    component:  fromContainers.AwsAuthsComponent
   }
 ];
 @NgModule({

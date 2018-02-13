@@ -19,8 +19,8 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
         this.model = [
-            {label: 'Dashboard - fix', icon: 'dashboard', routerLink: ['/']},
-            
+            {label: 'Dashboard - UPDATE ', icon: 'dashboard', routerLink: ['/']},
+    /*
             {
                 label: 'Internal Customers - remove', icon: 'person',
                 items: [
@@ -38,16 +38,17 @@ export class AppMenuComponent implements OnInit {
 
                 ]
             },
+            */
             {
                 label: 'AWS', icon: 'cloud_queue',
                 items: [
-                    {label: 'Regions', icon: 'edit', routerLink: ['/builds/aws/regions']},
-                    {label: 'Instance Types', icon: 'build', routerLink: ['/builds/aws/instance-types']},
-                    {label: 'Authentictions', icon: 'build', routerLink: ['/builds/aws/authentications']}
+                    {label: 'Regions', icon: 'place', routerLink: ['/builds/aws/regions']},
+                    {label: 'Instance Types', icon: 'computer', routerLink: ['/builds/aws/instance-types']},
+                    {label: 'Authentictions', icon: 'security', routerLink: ['/builds/aws/authentications']}
 
                 ]
-            }                 
-/*
+            } /* ,               
+
             {
                 label: 'Themes', icon: 'palette', badge: '6',
                 items: [
@@ -65,8 +66,8 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Grey - Deep Orange', icon: 'brush', command: (event) => {this.changeTheme('grey'); }}
                 ]
             },
-*/
-/*
+
+
             {
                 label: 'Customization', icon: 'settings_application',
                 items: [
@@ -82,7 +83,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Top Profile', icon: 'person_pin',  command: () => this.app.profileMode = 'top'},
                 ]
             },
-*/            /*
+            
             {
                 label: 'Components', icon: 'list', badge: '2', badgeStyleClass: 'teal-badge',
                 items: [
@@ -108,8 +109,8 @@ export class AppMenuComponent implements OnInit {
                     {label: '404 Page', icon: 'error_outline', url: 'assets/pages/404.html', target: '_blank'},
                     {label: 'Access Denied Page', icon: 'security', url: 'assets/pages/access.html', target: '_blank'}
                 ]
-            },*/
-/*            
+            },
+         
             {
                 label: 'Menu Hierarchy', icon: 'menu',
                 items: [
@@ -155,8 +156,8 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
-*/            
-/*
+           
+
             {label: 'Utils', icon: 'build', routerLink: ['/utils']},
             {label: 'Documentation', icon: 'find_in_page', routerLink: ['/documentation']} */
         ];

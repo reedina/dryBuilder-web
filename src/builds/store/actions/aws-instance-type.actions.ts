@@ -4,7 +4,7 @@ import { AwsInstanceType } from '../../models/aws-instance-type.model';
 
 // LOAD AWS INSTANCE_TYPES - Action Constants
 export const LOAD_AWS_INSTANCE_TYPES = '[Builds] Load AWS Instance Types';
-export const LOAD_AWS_INSTANCE_TYPES_FAIL = '[Builds] AWS Instance Types Fail';
+export const LOAD_AWS_INSTANCE_TYPES_FAIL = '[Builds] Load AWS Instance Types Fail';
 export const LOAD_AWS_INSTANCE_TYPES_SUCCESS = '[Builds] Load AWS Instance Types Success';
 
 // Action Creators

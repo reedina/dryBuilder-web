@@ -1,0 +1,173 @@
+<div class="alltimesheets ui-g">
+    
+      <div class="header ui-g-12">
+        <h2>
+          AWS - Authentications
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="awsAuths" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No Auth Accounts found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="aws_auth_accounts"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+  
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="account_name" header="Account Name" [sortable]="true" ></p-column>
+        <p-column field="access_type" header="Access Type" [sortable]="true" ></p-column>
+        <p-column field="access_key_id" header="Access Key ID" [sortable]="true" ></p-column>   
+        <p-column field="secret_key" header="Secret Key" [sortable]="true" ></p-column>       
+        
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#editAuth"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD Auth Form -->
+<div id="addAuth"></div>
+<p-panel header="Add AWS Auth" class="ui-g-6">
+  <form [formGroup]="awsAuthForm" (ngSubmit)="save()">
+
+    <!-- Input Account Name -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="AccountNameID" class="ui-g-12 ui-lg-2">Account Name</label>
+         <input type="text" pInputText id="AccountNameID" formControlName="account_name" placeholder="Account Name"  class="ui-g-12 ui-lg-8">
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="awsAuthForm" field="account_name" nicename="Account Name"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input Access Type -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="AccessTypeID" class="ui-g-12 ui-lg-2">Access Type</label>
+          <input type="text" pInputText id="AccessTypeID" formControlName="access_type" placeholder="Access Type"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="awsAuthForm" field="access_type" nicename="Access Type"> </at-fielderrors>
+          </div>
+     </div>
+
+      <!-- Input Access Key ID -->
+         <div class="ui-g ui-md-offset-1">
+          <label for="AccessKeyID" class="ui-g-12 ui-lg-2">Access Key ID</label>
+          <input type="text" pInputText id="AccessKeyID" formControlName="access_key_id" placeholder="Access Key ID"  class="ui-g-12 ui-lg-8"> 
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="awsAuthForm" field="access_key_id" nicename="Access Key ID"> </at-fielderrors>
+          </div>
+     </div>  
+
+       <!-- Input Secret Key -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="SecretKeyID" class="ui-g-12 ui-lg-2">Secret Key</label>
+         <input type="text" pInputText id="SecretKeyID" formControlName="secret_key" placeholder="Secret Key"  class="ui-g-12 ui-lg-8"> 
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="awsAuthForm" field="secret_key" nicename="Secret Key"> </at-fielderrors>
+        </div>
+   </div>   
+   
+    
+    
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!awsAuthForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!awsAuthForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+                  
+    </form>
+ </p-panel>
+</div>
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT Auth Form -->
+    <div id="editAuth"></div>
+    <p-panel header="Edit AWS Auth" class="ui-g-6">
+      <form [formGroup]="awsAuthEditForm" (ngSubmit)="update()">
+
+        <!-- Input Auth ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="EditID" class="ui-g-12 ui-lg-2">ID</label>
+            <input type="text" pInputText id="EditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="awsAuthEditForm" field="id" nicename="Auth ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input Account Name -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="AccountNameEditID" class="ui-g-12 ui-lg-2">Account Name</label>
+             <input type="text" pInputText id="AccountNameEditID" formControlName="account_name"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="awsAuthEditForm" field="account_name" nicename="Account Name"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input Access Type -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="AccessTypeEditID" class="ui-g-12 ui-lg-2">Access Type</label>
+              <input type="text" pInputText id="AccessTypeEditID" formControlName="access_type"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsAuthEditForm" field="access_type" nicename="Access Type"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input Access Key ID -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="AccessKeyIDEdit" class="ui-g-12 ui-lg-2">Access Key ID</label>
+              <input type="text" pInputText id="AccessKeyIDEdit" formControlName="access_key_id"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsAuthEditForm" field="access_key_id" nicename="Access Key ID"> </at-fielderrors>
+              </div>
+         </div>  
+    
+            <!-- Input Secret Key -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="SecretKeyIDEdit" class="ui-g-12 ui-lg-2">Secret Key</label>
+              <input type="text" pInputText id="SecretKeyIDEdit" formControlName="secret_key"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="awsAuthEditForm" field="secret_key" nicename="Secret Key"> </at-fielderrors>
+              </div>
+         </div>  
+         
+       
+        
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!awsAuthEditForm.dirty || !awsAuthEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!awsAuthEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+
