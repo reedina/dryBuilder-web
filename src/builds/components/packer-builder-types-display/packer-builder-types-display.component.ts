@@ -60,7 +60,7 @@ export class PackerBuilderTypesDisplayComponent implements OnChanges {
             const curLength = (cur == null) ? 0 : cur.length;
             const prevLength = (prev == null) ? 0 : prev.length;
 
-            if ((curLength - prevLength) === 1) {
+            if (curLength > 1 && (curLength - prevLength) === 1) {
                 const newElement = _.difference(cur, prev);
                 this.showSuccess('Added', newElement[0].type);
             }
