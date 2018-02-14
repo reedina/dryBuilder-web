@@ -7,7 +7,7 @@
       </div>
   
     <!-- Data Table -->    
-    <p-dataTable #dt [value]="awsAuths" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No Auth Accounts found"
+    <p-dataTable #dt [value]="awsAuths" class="ui-g-12" sortField="account_name" sortOrder="1" emptyMessage="No Auth Accounts found"
     [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="aws_auth_accounts"
      [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
   

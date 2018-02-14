@@ -1,0 +1,151 @@
+<div class="alltimesheets ui-g">
+    
+      <div class="header ui-g-12">
+        <h2>
+          Packer Builder Types
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="packerBuilderTypes" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No Packer builder types found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="packer_builder_types"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+  
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="name" header="Name" [sortable]="true" ></p-column>
+        <p-column field="description" header="Description" [sortable]="true" ></p-column>
+        <p-column field="type" header="Type" [sortable]="true" ></p-column>       
+        
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#editPackerBuilderType"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD PackerBuilderType Form -->
+<div id="addPackerBuilderType"></div>
+<p-panel header="Add Packer Builder Type" class="ui-g-6">
+  <form [formGroup]="packerBuilderTypeForm" (ngSubmit)="save()">
+
+    <!-- Input Name -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
+         <input type="text" pInputText id="NameID" formControlName="name" placeholder="Name"  class="ui-g-12 ui-lg-8">
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="packerBuilderTypeForm" field="name" nicename="Name"> </at-fielderrors>
+         </div>
+    </div> 
+
+     <!-- Input Description -->
+     <div class="ui-g ui-md-offset-1">
+      <label for="DescriptionID" class="ui-g-12 ui-lg-2">Description</label>
+      <input type="text" pInputText id="DescriptionID" formControlName="description" placeholder="Description"  class="ui-g-12 ui-lg-8"> 
+      <div  class="ui-g-12 ui-lg-offset-2" > 
+         <at-fielderrors [form]="packerBuilderTypeForm" field="description" nicename="Description"> </at-fielderrors>
+      </div>
+ </div>  
+
+    <!-- Input Type -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="TypeID" class="ui-g-12 ui-lg-2">Type</label>
+          <input type="text" pInputText id="TypeID" formControlName="type" placeholder="Type"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="packerBuilderTypeForm" field="type" nicename="Type"> </at-fielderrors>
+          </div>
+     </div>
+ 
+    
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!packerBuilderTypeForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!packerBuilderTypeForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+                  
+    </form>
+ </p-panel>
+</div>
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT PackerBuilderType Form -->
+    <div id="editPackerBuilderType"></div>
+    <p-panel header="Edit Packer Builder Type" class="ui-g-6">
+      <form [formGroup]="packerBuilderTypeEditForm" (ngSubmit)="update()">
+
+        <!-- Input PackerBuilderType ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="EditID" class="ui-g-12 ui-lg-2">ID</label>
+            <input type="text" pInputText id="EditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="packerBuilderTypeEditForm" field="id" nicename="Packer Builder Type ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input Name -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="NameEditID" class="ui-g-12 ui-lg-2">Name</label>
+             <input type="text" pInputText id="NameEditID" formControlName="name"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="packerBuilderTypeEditForm" field="name" nicename="Name"> </at-fielderrors>
+             </div>
+        </div>
+
+          <!-- Input Description -->
+          <div class="ui-g ui-md-offset-1">
+            <label for="DescriptionIDEdit" class="ui-g-12 ui-lg-2">Description</label>
+            <input type="text" pInputText id="DescriptionEditID" formControlName="description"  class="ui-g-12 ui-lg-8"> -->
+            <div  class="ui-g-12 ui-lg-offset-2" > 
+               <at-fielderrors [form]="packerBuilderTypeEditForm" field="description" nicename="Description"> </at-fielderrors>
+            </div>
+       </div>  
+
+        <!-- Input Type -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="TypeEditID" class="ui-g-12 ui-lg-2">Type</label>
+              <input type="text" pInputText id="PackerBuilderTypeEditID" formControlName="type"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="packerBuilderTypeEditForm" field="type" nicename="Type"> </at-fielderrors>
+              </div>
+         </div>
+    
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!packerBuilderTypeEditForm.dirty || !packerBuilderTypeEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!packerBuilderTypeEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+

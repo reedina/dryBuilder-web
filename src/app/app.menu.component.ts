@@ -47,7 +47,14 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Authentictions', icon: 'security', routerLink: ['/builds/aws/authentications']}
 
                 ]
-            } /* ,               
+            },
+            {
+                label: 'Packer', icon: 'build',
+                items: [
+                    {label: 'Builder Types', icon: 'devices', routerLink: ['/builds/packer/builder/types']}
+                ]
+            } /*
+              ,               
 
             {
                 label: 'Themes', icon: 'palette', badge: '6',

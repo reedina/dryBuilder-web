@@ -7,7 +7,7 @@
       </div>
   
     <!-- Data Table -->    
-    <p-dataTable #dt [value]="awsInstanceTypes" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No instance types found"
+    <p-dataTable #dt [value]="awsInstanceTypes" class="ui-g-12" sortField="category" sortOrder="1" emptyMessage="No instance types found"
     [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="aws_instance_types"
      [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
   
