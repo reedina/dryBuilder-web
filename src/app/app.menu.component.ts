@@ -51,7 +51,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Packer', icon: 'build',
                 items: [
-                    {label: 'Builder Types', icon: 'devices', routerLink: ['/builds/packer/builder/types']}
+                    {label: 'Builder Types', icon: 'devices', routerLink: ['/builds/packer/builder/types']},
+                    {label: 'AMI - Linux Filters', icon: 'devices', routerLink: ['/builds/packer/ami/filter/linuxes']}
                 ]
             } /*
               ,               

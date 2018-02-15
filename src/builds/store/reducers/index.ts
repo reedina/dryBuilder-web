@@ -4,6 +4,7 @@ import * as fromAwsRegions from './aws-region.reducers';
 import * as fromAwsInstanceTypes from './aws-instance-type.reducers';
 import * as fromAwsAuths from './aws-auth.reducers';
 import * as fromPackerBuilderTypes from './packer-builder-type.reducers';
+import * as fromAmiFilterLinuxes from './packer-ami-filter-linux.reducers';
 
 export interface BuildState {
    packer: fromPacker.PackerTemplateState;
@@ -11,6 +12,7 @@ export interface BuildState {
    instance_types: fromAwsInstanceTypes.AwsInstanceTypeState;
    auths: fromAwsAuths.AwsAuthState;
    packer_builder_types: fromPackerBuilderTypes.PackerBuilderTypeState;
+   ami_filter_linuxes: fromAmiFilterLinuxes.AmiFilterLinuxState;
 }
 
 export const reducers: ActionReducerMap<BuildState> = {
@@ -18,7 +20,8 @@ export const reducers: ActionReducerMap<BuildState> = {
   regions: fromAwsRegions.reducer,
   instance_types: fromAwsInstanceTypes.reducer,
   auths: fromAwsAuths.reducer,
-  packer_builder_types: fromPackerBuilderTypes.reducer
+  packer_builder_types: fromPackerBuilderTypes.reducer,
+  ami_filter_linuxes: fromAmiFilterLinuxes.reducer
 };
 
 

@@ -1,0 +1,261 @@
+<div class="alltimesheets ui-g">
+    
+      <div class="header ui-g-12">
+        <h2>
+          Packer Ami Filter Linuxes
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="amiFilterLinuxes" class="ui-g-12" sortField="friendly_name" sortOrder="1" emptyMessage="No Packer AMI Filter Linuxes found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="packer_ami_filter_linuxes"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+  
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="builder_types_id" header="Builder Type ID" [sortable]="true" ></p-column>
+        <p-column field="friendly_name" header="Friendly Name" [sortable]="true" ></p-column>
+        <p-column field="description" header="Description" [sortable]="true" ></p-column>   
+        <p-column field="ssh_username" header="SSH Username" [sortable]="true" ></p-column>       
+        <p-column field="virtualization_type" header="Virtualization Type" [sortable]="true" ></p-column>  
+        <p-column field="name" header="Name" [sortable]="true" ></p-column>  
+        <p-column field="root_device_type" header="Root Device Type" [sortable]="true" ></p-column>  
+        <p-column field="most_recent" header="Most Recent" [sortable]="true" ></p-column>  
+        <p-column field="owners" header="Owners" [sortable]="true" ></p-column>    
+
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#editAmiFilterLinux"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD AmiFilterLinux Form -->
+<div id="addAmiFilterLinux"></div>
+<p-panel header="Add Packer AMI Filter Linux" class="ui-g-6">
+  <form [formGroup]="amiFilterLinuxForm" (ngSubmit)="save()">
+
+    <!-- Input Builder Types ID -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="BuildersTypeID" class="ui-g-12 ui-lg-2">Builder Type ID</label>
+         <p-spinner size="30" id="BuildersTypeID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner>
+         <!-- <input type="text" pInputText id="BuildersTypeID" formControlName="builder_types_id" placeholder="Builders Type ID"  class="ui-g-12 ui-lg-8"> -->
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="amiFilterLinuxForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input Friendly Name -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="FriendlyNameID" class="ui-g-12 ui-lg-2">Friendly Name</label>
+          <input type="text" pInputText id="FriendlyNameID" formControlName="friendly_name" placeholder="Friendly Name"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="amiFilterLinuxForm" field="friendly_name" nicename="Friendly Name"> </at-fielderrors>
+          </div>
+     </div>
+
+      <!-- Input Description -->
+         <div class="ui-g ui-md-offset-1">
+          <label for="DescriptionID" class="ui-g-12 ui-lg-2">Description</label>
+          <input type="text" pInputText id="DescriptionID" formControlName="description" placeholder="Description"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="amiFilterLinuxForm" field="description" nicename="Description"> </at-fielderrors>
+          </div>
+     </div>  
+
+       <!-- Input SSH Username -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="SSHUsernameID" class="ui-g-12 ui-lg-2">SSH Username</label>
+        <input type="text" pInputText id="SSHUsername" formControlName="ssh_username" placeholder="SSH Username"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
+        </div>
+   </div>   
+   
+        <!-- Input Virtualization Type -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="VirtualizationTypeID" class="ui-g-12 ui-lg-2">Virtualization Type</label>
+        <input type="text" pInputText id="VirtualizationTypeID" formControlName="virtualization_type" placeholder="Virtualization_type"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="virtualization_type" nicename="Virtualization Type"> </at-fielderrors>
+        </div>
+   </div>      
+
+       <!-- Input Name -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
+        <input type="text" pInputText id="NameID" formControlName="name" placeholder="Name"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="name" nicename="Name"> </at-fielderrors>
+        </div>
+   </div>       
+
+       <!-- Input Root Device Type -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="RootDeviceTypeID" class="ui-g-12 ui-lg-2">Root Device Type</label>
+        <input type="text" pInputText id="RootDeviceTypeID" formControlName="root_device_type" placeholder="Root Device Type"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="root_device_type" nicename="Root Device Type"> </at-fielderrors>
+        </div>
+   </div>   
+
+       <!-- Input Most Recent -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="MostRecentID" class="ui-g-12 ui-lg-2">Most Recent</label>
+        <input type="text" pInputText id="MostRecentID" formControlName="most_recent" placeholder="Most Recent"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="most_recent" nicename="Most Recent"> </at-fielderrors>
+        </div>
+   </div>   
+       <!-- Input Owners -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="OwnersID" class="ui-g-12 ui-lg-2">Owners</label>
+        <input type="text" pInputText id="OwnersID" formControlName="owners" placeholder="Owners"  class="ui-g-12 ui-lg-8">
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="amiFilterLinuxForm" field="owners" nicename="Owners"> </at-fielderrors>
+        </div>
+   </div>   
+
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!amiFilterLinuxForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!amiFilterLinuxForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+                  
+    </form>
+ </p-panel>
+</div>
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT AmiFilterLinux Form -->
+    <div id="editAmiFilterLinux"></div>
+    <p-panel header="Edit Packer AMI Filter Linux" class="ui-g-6">
+      <form [formGroup]="amiFilterLinuxEditForm" (ngSubmit)="update()">
+
+        <!-- Input AmiFilterLinux ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="NameEditID" class="ui-g-12 ui-lg-2">ID</label>
+            <input type="text" pInputText id="EditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="amiFilterLinuxEditForm" field="id" nicename="AmiFilterLinux ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input Builder Types ID -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="BuildersTypeEditID" class="ui-g-12 ui-lg-2">Builders Type ID</label>
+             <!-- <input type="text" pInputText id="BuildersTypeEditID" formControlName="builder_types_id"  class="ui-g-12 ui-lg-8"> -->
+             <p-spinner size="30" id="BuildersTypeEditID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner>
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="amiFilterLinuxEditForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input Friendly Name -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="FriendlyNameEditID" class="ui-g-12 ui-lg-2">Friendly Name</label>
+              <input type="text" pInputText id="AmiFilterLinuxEditID" formControlName="friendly_name"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="friendly_name" nicename="Friendly Name"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input Description -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="DescriptionIDEdit" class="ui-g-12 ui-lg-2">Description</label>
+              <input type="text" pInputText id="DescriptionEditID" formControlName="description"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="description" nicename="Description"> </at-fielderrors>
+              </div>
+         </div>  
+    
+            <!-- Input SSH Username -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="SSHUsernameIDEdit" class="ui-g-12 ui-lg-2">SSH Username</label>
+              <input type="text" pInputText id="SSHUsernameEditID" formControlName="ssh_username"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
+              </div>
+         </div>  
+
+            <!-- Input  Virtualization Type -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="VirtualizationTypeIDEdit" class="ui-g-12 ui-lg-2">Virtualization Type</label>
+              <input type="text" pInputText id="VirtualizationTypeEditID" formControlName="virtualization_type"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="virtualization_type" nicename="Virtualization Type"> </at-fielderrors>
+              </div>
+         </div>         
+       
+             <!-- Input Name -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="NameIDEdit" class="ui-g-12 ui-lg-2">Name</label>
+              <input type="text" pInputText id="NameEditID" formControlName="name"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="name" nicename="Name"> </at-fielderrors>
+              </div>
+         </div>       
+            <!-- Input Root Device Type -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="RootDeviceTypeIDEdit" class="ui-g-12 ui-lg-2">Root Device Type</label>
+              <input type="text" pInputText id="RootDeviceTypeEditID" formControlName="root_device_type"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="root_device_type" nicename="Root Device Type"> </at-fielderrors>
+              </div>
+         </div>
+            <!-- Input Most Recent -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="MostRecentIDEdit" class="ui-g-12 ui-lg-2">Most Recent</label>
+              <input type="text" pInputText id="MostRecentEditID" formControlName="most_recent"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="most_recent" nicename="Most Recent"> </at-fielderrors>
+              </div>
+         </div>
+            <!-- Input Owners -->
+            <div class="ui-g ui-md-offset-1">
+              <label for="OwnersIDEdit" class="ui-g-12 ui-lg-2">Owners</label>
+              <input type="text" pInputText id="OwnersEditID" formControlName="owners"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="owners" nicename="Owners"> </at-fielderrors>
+              </div>
+         </div>
+
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!amiFilterLinuxEditForm.dirty || !amiFilterLinuxEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!amiFilterLinuxEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+

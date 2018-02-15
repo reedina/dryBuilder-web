@@ -109,6 +109,10 @@ export const ROUTES: Routes = [
   {
     path: 'packer/builder/types',
     component:  fromContainers.PackerBuilderTypesComponent
+  },
+  {
+    path: 'packer/ami/filter/linuxes',
+    component:  fromContainers.AmiFilterLinuxesComponent
   }
 ];
 @NgModule({
