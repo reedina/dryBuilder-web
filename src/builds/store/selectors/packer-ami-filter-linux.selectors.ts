@@ -34,6 +34,12 @@ export const getSelectedAmiFilterLinux = createSelector(
   (entities, router): AmiFilterLinux => {
     return router.state && entities[router.state.queryParams.edit];
   }
-
 );
 
+export const getSelectedAmiFilterLinuxClone = createSelector(
+  getAmiFilterLinuxesEntities ,
+  fromRoot.getRouterState,
+  (entities, router): AmiFilterLinux => {
+    return router.state && entities[router.state.queryParams.clone];
+  }
+);

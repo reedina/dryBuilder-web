@@ -26,6 +26,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
   @Output() updateAmiFilterLinux = new EventEmitter<AmiFilterLinux>();
   @Output() remove = new EventEmitter<AmiFilterLinux>();
   @Input() amiFilterLinuxEdit: AmiFilterLinux;
+  @Input() amiFilterLinuxClone: AmiFilterLinux;
 
   amiFilterLinuxForm: FormGroup;
   amiFilterLinuxEditForm: FormGroup;
@@ -45,7 +46,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
       virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       root_device_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      most_recent:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      most_recent:  ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       owners:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
       });
 
@@ -103,6 +104,25 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
                 });
          }
 
+         if (changes['amiFilterLinuxClone']) {
+            const chngEdit = changes['amiFilterLinuxClone'];
+             let curEdit  = chngEdit.currentValue;
+             if (curEdit === undefined ) { curEdit = {  builder_types_id: '', friendly_name: '', description: '',
+                            ssh_username: '', virtualization_type: '', name: '', root_device_type: '', most_recent: '',
+                             owners: ''}; }
+                this.amiFilterLinuxForm.setValue({
+                        builder_types_id: curEdit['builder_types_id'],
+                        friendly_name: curEdit['friendly_name'],
+                        description: curEdit['description'],
+                        ssh_username: curEdit['ssh_username'],
+                        virtualization_type: curEdit['virtualization_type'],
+                        name: curEdit['name'],
+                        root_device_type: curEdit['root_device_type'],
+                        most_recent: curEdit['most_recent'],
+                        owners: curEdit['owners']
+                });
+         }
+
     }
 
     confirm1(ami_filter_linux_id) {
@@ -124,6 +144,10 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
           }
       });
   }
+
+  confirm3(ami_filter_linux_id) {
+    this.router.navigate(['/builds/packer/ami/filter/linuxes'], { queryParams:  {clone: ami_filter_linux_id}} );
+}
   showError(message: string) {
     this.msgs = [];
     this.msgs.push({severity: 'error', summary: 'Error Message', detail: message});
@@ -144,6 +168,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
   onReset() {
     this.amiFilterLinuxForm.reset();
+    this.router.navigate(['/builds/packer/ami/filter/linuxes' ]);
   }
   onResetEdit() {
     this.amiFilterLinuxEditForm.reset();

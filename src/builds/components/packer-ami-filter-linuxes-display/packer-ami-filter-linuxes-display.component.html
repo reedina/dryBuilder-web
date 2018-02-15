@@ -30,6 +30,11 @@
                 <a pageScroll href="#editAmiFilterLinux"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
                   
                 </i></span></a>
+
+                <a pageScroll href="#editAmiFilterLinux"><span id='clickableAwesomeFont' (click)="confirm3(row.id)"  pTooltip="Clone Record"><i class="fa  fa-clone fa-2x">
+                  
+                </i></span></a>
+
               <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
             
           </div>
@@ -140,11 +145,11 @@
         </div>
    </div>   
 
-   <!-- Submit/Reset Button -->
+   <!-- Submit/Reset Button !amiFilterLinuxEditForm.dirty || !amiFilterLinuxEditForm.valid -->
    <div class="ui-g ui-lg-offset-1">
-    <button pButton type="submit" [disabled]="!amiFilterLinuxForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+    <button pButton type="submit" [disabled]="!amiFilterLinuxForm.dirty || !amiFilterLinuxForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
      
-    <button (click)="onReset()" pButton type="reset" [disabled]="!amiFilterLinuxForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+    <button (click)="onReset()" pButton type="reset" [disabled]="!amiFilterLinuxForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
   </div> 
                   
     </form>
