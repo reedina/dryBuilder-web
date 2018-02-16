@@ -144,7 +144,7 @@
        <div class="ui-g ui-lg-offset-1">
         <button pButton type="submit" [disabled]="!awsRegionEditForm.dirty || !awsRegionEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
          
-        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!awsRegionEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!(awsRegionEditForm.dirty || awsRegionEditForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
       </div> 
                       
         </form>

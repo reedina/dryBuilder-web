@@ -2,7 +2,7 @@
     
       <div class="header ui-g-12">
         <h2>
-          Packer Ami Filter Linuxes
+          Packer - Linux AMI Filters
         </h2>
       </div>
   
@@ -61,7 +61,7 @@
 <div class="alltimesheets ui-g" class="panel_spacer">
 <!-- Panel for ADD AmiFilterLinux Form -->
 <div id="addAmiFilterLinux"></div>
-<p-panel header="Add Packer AMI Filter Linux" class="ui-g-6">
+<p-panel header="Add Packer Linux AMI Filter" class="ui-g-6">
   <form [formGroup]="amiFilterLinuxForm" (ngSubmit)="save()">
 
     <!-- Input Builder Types ID -->
@@ -152,7 +152,7 @@
    <div class="ui-g ui-lg-offset-1">
     <button pButton type="submit" [disabled]="!amiFilterLinuxForm.dirty || !amiFilterLinuxForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
      
-    <button (click)="onReset()" pButton type="reset" [disabled]="!amiFilterLinuxForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+    <button (click)="onReset()" pButton type="reset" [disabled]="!(amiFilterLinuxForm.dirty || amiFilterLinuxForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
   </div> 
                   
     </form>
@@ -162,7 +162,7 @@
 <div class="alltimesheets ui-g" class="panel_spacer">
     <!-- Panel for EDIT AmiFilterLinux Form -->
     <div id="editAmiFilterLinux"></div>
-    <p-panel header="Edit Packer AMI Filter Linux" class="ui-g-6">
+    <p-panel header="Edit Packer Linux AMI Filter" class="ui-g-6">
       <form [formGroup]="amiFilterLinuxEditForm" (ngSubmit)="update()">
 
         <!-- Input AmiFilterLinux ID -->
@@ -259,7 +259,7 @@
        <div class="ui-g ui-lg-offset-1">
         <button pButton type="submit" [disabled]="!amiFilterLinuxEditForm.dirty || !amiFilterLinuxEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
          
-        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!amiFilterLinuxEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!(amiFilterLinuxEditForm.dirty || amiFilterLinuxEditForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
       </div> 
                       
         </form>

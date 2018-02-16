@@ -2,7 +2,7 @@
     
       <div class="header ui-g-12">
         <h2>
-          Packer Builder Types
+          Packer - Builder Types
         </h2>
       </div>
   
@@ -139,7 +139,7 @@
        <div class="ui-g ui-lg-offset-1">
         <button pButton type="submit" [disabled]="!packerBuilderTypeEditForm.dirty || !packerBuilderTypeEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
          
-        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!packerBuilderTypeEditForm.valid" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!(packerBuilderTypeEditForm.dirty || packerBuilderTypeEditForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
       </div> 
                       
         </form>

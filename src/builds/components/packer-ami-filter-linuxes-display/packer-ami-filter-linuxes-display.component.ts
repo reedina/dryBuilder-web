@@ -128,7 +128,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
     }
 
     confirm1(ami_filter_linux_id) {
-        this.router.navigate(['/builds/packer/ami/filter/linuxes'], { queryParams:  {edit: ami_filter_linux_id}} );
+        this.router.navigate(['/builds/packer/ami/linux/filters'], { queryParams:  {edit: ami_filter_linux_id}} );
     }
 
     confirm2(ami_filter_linux) {
@@ -138,7 +138,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
           icon: 'fa fa-trash',
           accept: () => {
               this.msgs = [{severity: 'error', summary: 'Confirmed', detail: `Deleting: <b>${ami_filter_linux.friendly_name}</b>`}];
-              this.router.navigate(['/builds/packer/ami/filter/linuxes' ]);
+              this.router.navigate(['/builds/packer/ami/linux/filters' ]);
               this.remove.emit(ami_filter_linux);
           },
           reject: () => {
@@ -148,7 +148,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
   }
 
   confirm3(ami_filter_linux_id) {
-    this.router.navigate(['/builds/packer/ami/filter/linuxes'], { queryParams:  {clone: ami_filter_linux_id}} );
+    this.router.navigate(['/builds/packer/ami/linux/filters'], { queryParams:  {clone: ami_filter_linux_id}} );
 }
   showError(message: string) {
     this.msgs = [];
@@ -170,11 +170,11 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
   onReset() {
     this.amiFilterLinuxForm.reset();
-    this.router.navigate(['/builds/packer/ami/filter/linuxes' ]);
+    this.router.navigate(['/builds/packer/ami/linux/filters' ]);
   }
   onResetEdit() {
     this.amiFilterLinuxEditForm.reset();
-    this.router.navigate(['/builds/packer/ami/filter/linuxes' ]);
+    this.router.navigate(['/builds/packer/ami/linux/filters' ]);
   }
   save(): void {
     if (this.amiFilterLinuxForm.dirty && this.amiFilterLinuxForm.valid) {
@@ -194,7 +194,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
         console.log('Attempting to Update: ' + JSON.stringify(this.amiFilterLinuxEditForm.value));
         const t = Object.assign({}, this.amiFilterLinux, this.amiFilterLinuxEditForm.value);
         this.amiFilterLinuxEditForm.reset();
-        this.router.navigate(['/builds/packer/ami/filter/linuxes' ]);
+        this.router.navigate(['/builds/packer/ami/linux/filters' ]);
         this.updateAmiFilterLinux.emit(t);
     }  else {
         // Remember, you only save a "valid" form

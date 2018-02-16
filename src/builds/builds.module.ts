@@ -111,7 +111,7 @@ export const ROUTES: Routes = [
     component:  fromContainers.PackerBuilderTypesComponent
   },
   {
-    path: 'packer/ami/filter/linuxes',
+    path: 'packer/ami/linux/filters',
     component:  fromContainers.AmiFilterLinuxesComponent
   }
 ];
