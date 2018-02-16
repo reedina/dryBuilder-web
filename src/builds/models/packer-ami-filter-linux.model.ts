@@ -10,7 +10,7 @@ export class AmiFilterLinuxClass implements AmiFilterLinux {
     public virtualization_type = '',
     public name = '',
     public root_device_type = '',
-    public most_recent = false,
+    public most_recent = true,
     public owners = '') {}
 
 }

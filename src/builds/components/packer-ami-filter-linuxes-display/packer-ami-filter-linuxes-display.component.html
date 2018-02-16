@@ -132,7 +132,9 @@
        <!-- Input Most Recent -->
        <div class="ui-g ui-md-offset-1">
         <label for="MostRecentID" class="ui-g-12 ui-lg-2">Most Recent</label>
-        <input type="text" pInputText id="MostRecentID" formControlName="most_recent" placeholder="Most Recent"  class="ui-g-12 ui-lg-8">
+         <p-checkbox formControlName="most_recent" binary="true"></p-checkbox> 
+        <!-- <p-inputSwitch onLabel="Yes" offLabel="No" formControlName="most_recent"></p-inputSwitch> -->
+        <!-- <input type="text" pInputText id="MostRecentID" formControlName="most_recent" placeholder="Most Recent"  class="ui-g-12 ui-lg-8"> -->
         <div  class="ui-g-12 ui-lg-offset-2" > 
            <at-fielderrors [form]="amiFilterLinuxForm" field="most_recent" nicename="Most Recent"> </at-fielderrors>
         </div>
@@ -238,7 +240,8 @@
             <!-- Input Most Recent -->
             <div class="ui-g ui-md-offset-1">
               <label for="MostRecentIDEdit" class="ui-g-12 ui-lg-2">Most Recent</label>
-              <input type="text" pInputText id="MostRecentEditID" formControlName="most_recent"  class="ui-g-12 ui-lg-8">
+              <p-checkbox formControlName="most_recent" binary="true"></p-checkbox> 
+              <!-- <input type="text" pInputText id="MostRecentEditID" formControlName="most_recent"  class="ui-g-12 ui-lg-8"> -->
               <div  class="ui-g-12 ui-lg-offset-2" > 
                  <at-fielderrors [form]="amiFilterLinuxEditForm" field="most_recent" nicename="Most Recent"> </at-fielderrors>
               </div>

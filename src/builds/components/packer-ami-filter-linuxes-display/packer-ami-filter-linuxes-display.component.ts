@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AmiFilterLinux, AmiFilterLinuxClass } from '../../models/packer-ami-filter-linux.model';
 import { MenuItem, DataTable, LazyLoadEvent, ButtonModule } from 'primeng/primeng';
 import {TooltipModule} from 'primeng/tooltip';
+import {CheckboxModule} from 'primeng/checkbox';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {SpinnerModule} from 'primeng/spinner';
@@ -47,7 +48,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
       virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       root_device_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      most_recent:  ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      most_recent:  [true, [Validators.required]],
       owners:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
       });
 
@@ -60,7 +61,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
         virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
         root_device_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-        most_recent:  ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+        most_recent:  [true, [Validators.required]],
         owners:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
         });
     }
