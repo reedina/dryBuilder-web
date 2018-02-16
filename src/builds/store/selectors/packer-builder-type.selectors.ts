@@ -39,3 +39,9 @@ export const getSelectedPackerBuilderType = createSelector(
 
 );
 
+export const getPackerBuilderTypesSelectList = createSelector(
+  getAllPackerBuilderTypes,
+  (elements: PackerBuilderType[]) => {
+      return elements.map(element => Object.assign({}, { label: element.type, value: element.id}) );
+  }
+);

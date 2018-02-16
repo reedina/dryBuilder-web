@@ -27,6 +27,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
   @Output() remove = new EventEmitter<AmiFilterLinux>();
   @Input() amiFilterLinuxEdit: AmiFilterLinux;
   @Input() amiFilterLinuxClone: AmiFilterLinux;
+  @Input() builderTypesSelectList: any;
 
   amiFilterLinuxForm: FormGroup;
   amiFilterLinuxEditForm: FormGroup;
@@ -111,7 +112,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
                             ssh_username: '', virtualization_type: '', name: '', root_device_type: '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxForm.setValue({
-                        builder_types_id: curEdit['builder_types_id'],
+                        builder_types_id:   curEdit['builder_types_id'],
                         friendly_name: curEdit['friendly_name'],
                         description: curEdit['description'],
                         ssh_username: curEdit['ssh_username'],

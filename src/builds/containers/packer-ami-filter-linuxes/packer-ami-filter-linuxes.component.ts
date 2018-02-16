@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
     (create)="submitForm($event)"
     [amiFilterLinuxEdit]="amiFilterLinux$ | async"
     [amiFilterLinuxClone]="amiFilterLinuxClone$ | async"
+    [builderTypesSelectList]="builderTypesSelectList$ | async"
     (updateAmiFilterLinux)="updateForm($event)"
     (remove)="onRemove($event)">
   </app-ami-filter-linuxes-display>
@@ -24,6 +25,7 @@ export class AmiFilterLinuxesComponent  implements OnInit {
   amiFilterLinuxes$: Observable<AmiFilterLinux[]>;
   amiFilterLinux$: Observable<AmiFilterLinux>;
   amiFilterLinuxClone$: Observable<AmiFilterLinux>;
+  builderTypesSelectList$: Observable<any>;
 
 
   constructor(private store: Store<fromStore.BuildState>, private amiFilterLinuxes: AmiFilterLinuxesService) {}
@@ -34,6 +36,8 @@ export class AmiFilterLinuxesComponent  implements OnInit {
       this.amiFilterLinux$ = this.store.select(fromStore.getSelectedAmiFilterLinux);
       this.amiFilterLinuxClone$ = this.store.select(fromStore.getSelectedAmiFilterLinuxClone);
       // this.store.select(fromStore.getQueryParamsEdit).subscribe(x => console.log(x.edit));
+      // this.store.select(fromStore.getPackerBuilderTypesSelectList).subscribe(x => console.log(x));
+      this.builderTypesSelectList$ = this.store.select(fromStore.getPackerBuilderTypesSelectList);
   }
 
   submitForm(amiFilterLinux: AmiFilterLinux) {

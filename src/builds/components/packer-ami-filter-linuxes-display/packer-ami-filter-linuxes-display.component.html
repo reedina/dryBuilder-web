@@ -66,8 +66,9 @@
 
     <!-- Input Builder Types ID -->
     <div class="ui-g ui-lg-offset-1">
-         <label for="BuildersTypeID" class="ui-g-12 ui-lg-2">Builder Type ID</label>
-         <p-spinner size="30" id="BuildersTypeID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner>
+         <label for="BuildersTypeID" class="ui-g-12 ui-lg-2">Builder Type</label>
+         <p-dropdown  placeholder="Select Builder Type" autoWidth="true"  [style]="{'width': '100%'}" id="BuilderTypesID" formControlName="builder_types_id" [options]="builderTypesSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+         <!-- <p-spinner size="30" id="BuildersTypeID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner> -->
          <!-- <input type="text" pInputText id="BuildersTypeID" formControlName="builder_types_id" placeholder="Builders Type ID"  class="ui-g-12 ui-lg-8"> -->
          <div  class="ui-g-12 ui-md-offset-2" > 
             <at-fielderrors [form]="amiFilterLinuxForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
@@ -173,9 +174,10 @@
     
         <!-- Input Builder Types ID -->
         <div class="ui-g ui-lg-offset-1">
-             <label for="BuildersTypeEditID" class="ui-g-12 ui-lg-2">Builders Type ID</label>
+             <label for="BuildersTypeEditID" class="ui-g-12 ui-lg-2">Builders Type</label>
              <!-- <input type="text" pInputText id="BuildersTypeEditID" formControlName="builder_types_id"  class="ui-g-12 ui-lg-8"> -->
-             <p-spinner size="30" id="BuildersTypeEditID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner>
+             <p-dropdown  placeholder="Select Builder Type" autoWidth="true"  [style]="{'width': '100%'}" id="BuilderTypesEditID" formControlName="builder_types_id" [options]="builderTypesSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+             <!-- <p-spinner size="30" id="BuildersTypeEditID" formControlName="builder_types_id" [min]="1001" [max]="1100" class="ui-g-12 ui-lg-8"></p-spinner> -->
              <div  class="ui-g-12 ui-md-offset-2" > 
                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
              </div>
