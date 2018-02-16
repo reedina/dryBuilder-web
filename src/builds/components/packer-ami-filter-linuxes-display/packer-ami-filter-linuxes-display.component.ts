@@ -42,8 +42,6 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
     this.amiFilterLinuxForm = this.fb.group({
       builder_types_id:  ['', [Validators.required]],
-      friendly_name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      description:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
       ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
@@ -55,8 +53,6 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
       this.amiFilterLinuxEditForm = this.fb.group({
         id:  ['',  [Validators.required, Validators.min(3), Validators.maxLength(50)]],
         builder_types_id:  ['', [Validators.required]],
-        friendly_name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-        description:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
         ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
@@ -77,26 +73,24 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
             if (curLength > 1 && (curLength - prevLength) === 1) {
                 const newElement = _.difference(cur, prev);
-                this.showSuccess('Added', newElement[0].friendly_name);
+                this.showSuccess('Added', newElement[0].name);
             }
             if (curLength > 1 && (curLength - prevLength) === 0) {
                 const changedElement = _.difference(cur, prev);
                 if (changedElement.length === 1) {   // Silly hack to fix issue;  Move to Store
-                    this.showSuccess('Updated', changedElement[0].friendly_name);
+                    this.showSuccess('Updated', changedElement[0].name);
                 }
             }
         }
          if (changes['amiFilterLinuxEdit']) {
             const chngEdit = changes['amiFilterLinuxEdit'];
              let curEdit  = chngEdit.currentValue;
-             if (curEdit === undefined ) { curEdit = { id: '', builder_types_id: '', friendly_name: '', description: '',
+             if (curEdit === undefined ) { curEdit = { id: '', builder_types_id: '',
                             ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxEditForm.setValue({
                         id: curEdit['id'],
                         builder_types_id: curEdit['builder_types_id'],
-                        friendly_name: curEdit['friendly_name'],
-                        description: curEdit['description'],
                         ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
@@ -109,13 +103,11 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
          if (changes['amiFilterLinuxClone']) {
             const chngEdit = changes['amiFilterLinuxClone'];
              let curEdit  = chngEdit.currentValue;
-             if (curEdit === undefined ) { curEdit = {  builder_types_id: '', friendly_name: '', description: '',
+             if (curEdit === undefined ) { curEdit = {  builder_types_id: '', 
                             ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxForm.setValue({
                         builder_types_id:   curEdit['builder_types_id'],
-                        friendly_name: curEdit['friendly_name'],
-                        description: curEdit['description'],
                         ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
@@ -133,16 +125,16 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
     confirm2(ami_filter_linux) {
       this.confirmationService.confirm({
-          message: `Do you want to delete: <b> ${ami_filter_linux.friendly_name} </b>`,
+          message: `Do you want to delete: <b> ${ami_filter_linux.name} </b>`,
           header: 'Delete Confirmation',
           icon: 'fa fa-trash',
           accept: () => {
-              this.msgs = [{severity: 'error', summary: 'Confirmed', detail: `Deleting: <b>${ami_filter_linux.friendly_name}</b>`}];
+              this.msgs = [{severity: 'error', summary: 'Confirmed', detail: `Deleting: <b>${ami_filter_linux.name}</b>`}];
               this.router.navigate(['/builds/packer/ami/linux/filters' ]);
               this.remove.emit(ami_filter_linux);
           },
           reject: () => {
-              this.msgs = [{severity: 'info', summary: 'Cancelled', detail: `Not Deleting: <b>${ami_filter_linux.friendly_name}</b>`}];
+              this.msgs = [{severity: 'info', summary: 'Cancelled', detail: `Not Deleting: <b>${ami_filter_linux.name}</b>`}];
           }
       });
   }
@@ -152,7 +144,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 }
   showError(message: string) {
     this.msgs = [];
-    this.msgs.push({severity: 'error', summary: 'Error Message', detail: message});
+    this.msgs.push({severity: 'error', summary: 'Error Message', detail: `${this.truncate(message)}`});
   }
 
   showSuccess(type: string, name: string) {
@@ -182,6 +174,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
         const t = Object.assign({}, this.amiFilterLinux, this.amiFilterLinuxForm.value);
         this.amiFilterLinuxForm.reset();
         console.log(t);
+        this.router.navigate(['/builds/packer/ami/linux/filters' ]);
         this.create.emit(t);
     }  else {
         // Remember, you only save a "valid" form
@@ -194,6 +187,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
         console.log('Attempting to Update: ' + JSON.stringify(this.amiFilterLinuxEditForm.value));
         const t = Object.assign({}, this.amiFilterLinux, this.amiFilterLinuxEditForm.value);
         this.amiFilterLinuxEditForm.reset();
+        console.log(t);
         this.router.navigate(['/builds/packer/ami/linux/filters' ]);
         this.updateAmiFilterLinux.emit(t);
     }  else {
