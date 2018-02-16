@@ -19,7 +19,7 @@
         <p-column field="ssh_username" header="SSH Username" [sortable]="true" ></p-column>       
         <p-column field="virtualization_type" header="Virtualization Type" [sortable]="true" ></p-column>  
         <p-column field="name" header="Name" [sortable]="true" ></p-column>  
-        <p-column field="root_device_type" header="Root Device Type" [sortable]="true" ></p-column>  
+        <p-column field="root-device-type" header="Root Device Type" [sortable]="true" ></p-column>  
         <p-column field="most_recent" header="Most Recent" [sortable]="true" ></p-column>  
         <p-column field="owners" header="Owners" [sortable]="true" ></p-column>    
 
@@ -123,9 +123,9 @@
        <!-- Input Root Device Type -->
        <div class="ui-g ui-md-offset-1">
         <label for="RootDeviceTypeID" class="ui-g-12 ui-lg-2">Root Device Type</label>
-        <input type="text" pInputText id="RootDeviceTypeID" formControlName="root_device_type" placeholder="Root Device Type"  class="ui-g-12 ui-lg-8">
+        <input type="text" pInputText id="RootDeviceTypeID" formControlName="root-device-type" placeholder="Root Device Type"  class="ui-g-12 ui-lg-8">
         <div  class="ui-g-12 ui-lg-offset-2" > 
-           <at-fielderrors [form]="amiFilterLinuxForm" field="root_device_type" nicename="Root Device Type"> </at-fielderrors>
+           <at-fielderrors [form]="amiFilterLinuxForm" field="root-device-type" nicename="Root Device Type"> </at-fielderrors>
         </div>
    </div>   
 
@@ -232,9 +232,9 @@
             <!-- Input Root Device Type -->
             <div class="ui-g ui-md-offset-1">
               <label for="RootDeviceTypeIDEdit" class="ui-g-12 ui-lg-2">Root Device Type</label>
-              <input type="text" pInputText id="RootDeviceTypeEditID" formControlName="root_device_type"  class="ui-g-12 ui-lg-8">
+              <input type="text" pInputText id="RootDeviceTypeEditID" formControlName="root-device-type"  class="ui-g-12 ui-lg-8">
               <div  class="ui-g-12 ui-lg-offset-2" > 
-                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="root_device_type" nicename="Root Device Type"> </at-fielderrors>
+                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="root-device-type" nicename="Root Device Type"> </at-fielderrors>
               </div>
          </div>
             <!-- Input Most Recent -->

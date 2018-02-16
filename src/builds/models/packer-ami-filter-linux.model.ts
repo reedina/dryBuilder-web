@@ -2,16 +2,40 @@
 // AWS Instance Types
 
 export class AmiFilterLinuxClass implements AmiFilterLinux {
-  constructor(public id = 0,
-    public builder_types_id = 0,
-    public friendly_name = '',
-    public description = '',
-    public ssh_username = '',
-    public virtualization_type = '',
-    public name = '',
-    public root_device_type = '',
-    public most_recent = true,
-    public owners = '') {}
+    public id: number;
+    public builder_types_id: number;
+    public friendly_name: string;
+    public description: string;
+    public ssh_username: string;
+    public virtualization_type: string;
+    public name: string;
+    public 'root-device-type': string;
+    public most_recent: boolean;
+    public owners: string;
+
+  constructor(id = 0,
+    builder_types_id = 0,
+    friendly_name = '',
+    description = '',
+    ssh_username = '',
+    virtualization_type = '',
+    name = '',
+    root_device_type = '',
+    most_recent = true,
+    owners = '') {
+
+    this.id = id;
+    this.builder_types_id = builder_types_id;
+    this.friendly_name = friendly_name;
+    this.description = description;
+    this.ssh_username = ssh_username;
+    this.virtualization_type = virtualization_type;
+    this.name = name;
+    this['root-device-type'] = root_device_type;
+    this.most_recent = most_recent;
+    this.owners = owners;
+
+    }
 
 }
 
@@ -24,7 +48,7 @@ export interface AmiFilterLinux {
   ssh_username: string;
   virtualization_type: string;
   name: string;
-  root_device_type: string;
+  'root-device-type': string;
   most_recent: boolean;
   owners: string;
 }

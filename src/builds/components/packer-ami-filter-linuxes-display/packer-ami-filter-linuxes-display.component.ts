@@ -47,7 +47,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
       ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      root_device_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      'root-device-type':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       most_recent:  [true, [Validators.required]],
       owners:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
       });
@@ -60,7 +60,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
         ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        root_device_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        'root-device-type':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         most_recent:  [true, [Validators.required]],
         owners:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
         });
@@ -90,7 +90,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
             const chngEdit = changes['amiFilterLinuxEdit'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_types_id: '', friendly_name: '', description: '',
-                            ssh_username: '', virtualization_type: '', name: '', root_device_type: '', most_recent: '',
+                            ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxEditForm.setValue({
                         id: curEdit['id'],
@@ -100,7 +100,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
                         ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
-                        root_device_type: curEdit['root_device_type'],
+                        'root-device-type': curEdit['root-device-type'],
                         most_recent: curEdit['most_recent'],
                         owners: curEdit['owners']
                 });
@@ -110,7 +110,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
             const chngEdit = changes['amiFilterLinuxClone'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = {  builder_types_id: '', friendly_name: '', description: '',
-                            ssh_username: '', virtualization_type: '', name: '', root_device_type: '', most_recent: '',
+                            ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxForm.setValue({
                         builder_types_id:   curEdit['builder_types_id'],
@@ -119,7 +119,7 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
                         ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
-                        root_device_type: curEdit['root_device_type'],
+                        'root-device-type': curEdit['root-device-type'],
                         most_recent: curEdit['most_recent'],
                         owners: curEdit['owners']
                 });
