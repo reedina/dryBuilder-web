@@ -19,6 +19,7 @@ import { Observable } from 'rxjs/Observable';
     [awsAuthSelectList]="awsAuthsSelectList$ | async"
     [awsRegionSelectList]="awsRegionSelectList$ | async"
     [awsInstanceTypeSelectList]="awsInstanceTypeSelectList$ | async"
+    [amiFilterLinuxSelectList]="amiFilterLinuxSelectList$ | async"
     (remove)="onRemove($event)">
     </app-ebs-builders-display>
   `
@@ -31,6 +32,7 @@ export class EbsBuildersComponent  implements OnInit {
   awsAuthsSelectList$: Observable<any>;
   awsRegionSelectList$: Observable<any>;
   awsInstanceTypeSelectList$: Observable<any>;
+  amiFilterLinuxSelectList$: Observable<any>;
 
   constructor(private store: Store<fromStore.BuildState>, private ebsBuilders: EbsBuildersService) {}
 
@@ -42,7 +44,10 @@ export class EbsBuildersComponent  implements OnInit {
       this.awsAuthsSelectList$ = this.store.select(fromStore.getAwsAuthSelectList);
       this.awsRegionSelectList$ = this.store.select(fromStore.getAwsRegionSelectList);
       this.awsInstanceTypeSelectList$ = this.store.select(fromStore.getAwsInstanceTypeSelectList);
+      this.amiFilterLinuxSelectList$ = this.store.select(fromStore.getAmiFilterLinuxEbsSelectList);
       // this.store.select(fromStore.getQueryParamsEdit).subscribe(x => console.log(x.edit));
+      // getPackerBuilderTypesAmazonEbsID
+      // this.store.select(fromStore.getAmiFilterLinuxEbsSelectList).subscribe(x => console.log(x));
   }
 
   submitForm(ebsBuilder: EbsBuilder) {

@@ -30,7 +30,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
   @Input() awsAuthSelectList: any;
   @Input() awsRegionSelectList: any;
   @Input() awsInstanceTypeSelectList: any;
-
+  @Input() amiFilterLinuxSelectList: any;
 
   ebsBuilderForm: FormGroup;
   ebsBuilderEditForm: FormGroup;
@@ -70,6 +70,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
             const chng = changes['ebsBuilders'];
             const cur  = chng.currentValue;
             const prev = chng.previousValue;
+            const firstChng = chng.firstChange;
             const curLength = (cur == null) ? 0 : cur.length;
             const prevLength = (prev == null) ? 0 : prev.length;
 

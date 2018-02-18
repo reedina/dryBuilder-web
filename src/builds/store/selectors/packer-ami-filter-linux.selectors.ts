@@ -3,6 +3,7 @@ import { createSelector } from '@ngrx/store';
 import * as fromRoot from '../../../app/store';
 import * as fromFeature from '../reducers';
 import * as fromAmiFilterLinuxes from '../reducers/packer-ami-filter-linux.reducers';
+import * as fromBuilderTypes from './packer-builder-type.selectors';
 
 import { AmiFilterLinux } from '../../models/packer-ami-filter-linux.model';
 
@@ -43,3 +44,17 @@ export const getSelectedAmiFilterLinuxClone = createSelector(
     return router.state && entities[router.state.queryParams.clone];
   }
 );
+
+export const getAmiFilterLinuxAmazonEbs = createSelector(
+  getAllAmiFilterLinuxes,
+  fromBuilderTypes.getPackerBuilderTypesAmazonEbsID,
+  (elements: AmiFilterLinux[],
+  builderTypeObject) => {
+      return elements.filter(element => builderTypeObject.id === element.builder_types_id);
+      });
+
+export const getAmiFilterLinuxEbsSelectList = createSelector(
+  getAmiFilterLinuxAmazonEbs,
+  (elements: AmiFilterLinux[]) => {
+    return elements.map(element => Object.assign({}, { label: element.name, value: element.id}) );
+  });

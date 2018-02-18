@@ -46,3 +46,11 @@ export const getPackerBuilderTypesSelectList = createSelector(
   }
 );
 
+export const getPackerBuilderTypesAmazonEbsID = createSelector(
+  getAllPackerBuilderTypes,
+  (elements: PackerBuilderType[]) => {
+      return elements.find(element =>  {
+           return element.type === 'amazon-ebs';
+           });
+       }
+    );
