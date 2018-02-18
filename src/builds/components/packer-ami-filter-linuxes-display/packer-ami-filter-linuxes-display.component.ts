@@ -42,7 +42,6 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
 
     this.amiFilterLinuxForm = this.fb.group({
       builder_types_id:  ['', [Validators.required]],
-      ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       'root-device-type':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -53,7 +52,6 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
       this.amiFilterLinuxEditForm = this.fb.group({
         id:  ['',  [Validators.required, Validators.min(3), Validators.maxLength(50)]],
         builder_types_id:  ['', [Validators.required]],
-        ssh_username:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         virtualization_type:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
         name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
         'root-device-type':  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -86,12 +84,11 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
             const chngEdit = changes['amiFilterLinuxEdit'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_types_id: '',
-                            ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
+                             virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxEditForm.setValue({
                         id: curEdit['id'],
                         builder_types_id: curEdit['builder_types_id'],
-                        ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
                         'root-device-type': curEdit['root-device-type'],
@@ -103,12 +100,11 @@ export class AmiFilterLinuxsDisplayComponent implements OnChanges {
          if (changes['amiFilterLinuxClone']) {
             const chngEdit = changes['amiFilterLinuxClone'];
              let curEdit  = chngEdit.currentValue;
-             if (curEdit === undefined ) { curEdit = {  builder_types_id: '', 
-                            ssh_username: '', virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
+             if (curEdit === undefined ) { curEdit = {  builder_types_id: '',
+                             virtualization_type: '', name: '', 'root-device-type': '', most_recent: '',
                              owners: ''}; }
                 this.amiFilterLinuxForm.setValue({
                         builder_types_id:   curEdit['builder_types_id'],
-                        ssh_username: curEdit['ssh_username'],
                         virtualization_type: curEdit['virtualization_type'],
                         name: curEdit['name'],
                         'root-device-type': curEdit['root-device-type'],

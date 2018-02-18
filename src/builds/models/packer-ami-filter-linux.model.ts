@@ -4,7 +4,6 @@
 export class AmiFilterLinuxClass implements AmiFilterLinux {
     public id: number;
     public builder_types_id: number;
-    public ssh_username: string;
     public virtualization_type: string;
     public name: string;
     public 'root-device-type': string;
@@ -13,7 +12,6 @@ export class AmiFilterLinuxClass implements AmiFilterLinux {
 
   constructor(id = 0,
     builder_types_id = 0,
-    ssh_username = '',
     virtualization_type = '',
     name = '',
     root_device_type = '',
@@ -22,7 +20,6 @@ export class AmiFilterLinuxClass implements AmiFilterLinux {
 
     this.id = id;
     this.builder_types_id = builder_types_id;
-    this.ssh_username = ssh_username;
     this.virtualization_type = virtualization_type;
     this.name = name;
     this['root-device-type'] = root_device_type;
@@ -37,7 +34,6 @@ export class AmiFilterLinuxClass implements AmiFilterLinux {
 export interface AmiFilterLinux {
   id: number;
   builder_types_id: number;
-  ssh_username: string;
   virtualization_type: string;
   name: string;
   'root-device-type': string;

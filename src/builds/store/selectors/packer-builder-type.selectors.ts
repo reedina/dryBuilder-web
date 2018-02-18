@@ -45,3 +45,4 @@ export const getPackerBuilderTypesSelectList = createSelector(
       return elements.map(element => Object.assign({}, { label: element.type, value: element.id}) );
   }
 );
+

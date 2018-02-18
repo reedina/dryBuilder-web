@@ -113,6 +113,10 @@ export const ROUTES: Routes = [
   {
     path: 'packer/ami/linux/filters',
     component:  fromContainers.AmiFilterLinuxesComponent
+  },
+  {
+    path: 'packer/builder/ebs',
+    component:  fromContainers.EbsBuildersComponent
   }
 ];
 @NgModule({

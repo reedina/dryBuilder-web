@@ -14,7 +14,6 @@
      <p-column field="id" header="Id" [sortable]="true" >
       </p-column>
         <p-column field="builder_types_id" header="Builder Type ID" [sortable]="true" ></p-column>
-        <p-column field="ssh_username" header="SSH Username" [sortable]="true" ></p-column>       
         <p-column field="virtualization_type" header="Virtualization Type" [sortable]="true" ></p-column>  
         <p-column field="name" header="Name" [sortable]="true" ></p-column>  
         <p-column field="root-device-type" header="Root Device Type" [sortable]="true" ></p-column>  
@@ -71,16 +70,7 @@
          <div  class="ui-g-12 ui-md-offset-2" > 
             <at-fielderrors [form]="amiFilterLinuxForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
          </div>
-    </div>
-
-       <!-- Input SSH Username -->
-       <div class="ui-g ui-md-offset-1">
-        <label for="SSHUsernameID" class="ui-g-12 ui-lg-2">SSH Username</label>
-        <input type="text" pInputText id="SSHUsername" formControlName="ssh_username" class="ui-g-12 ui-lg-8">
-        <div  class="ui-g-12 ui-lg-offset-2" > 
-           <at-fielderrors [form]="amiFilterLinuxForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
-        </div>
-   </div>   
+    </div> 
    
         <!-- Input Virtualization Type -->
        <div class="ui-g ui-md-offset-1">
@@ -164,15 +154,6 @@
                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="builder_types_id" nicename="Builders Type ID"> </at-fielderrors>
              </div>
         </div>
-    
-            <!-- Input SSH Username -->
-            <div class="ui-g ui-md-offset-1">
-              <label for="SSHUsernameIDEdit" class="ui-g-12 ui-lg-2">SSH Username</label>
-              <input type="text" pInputText id="SSHUsernameEditID" formControlName="ssh_username"  class="ui-g-12 ui-lg-8">
-              <div  class="ui-g-12 ui-lg-offset-2" > 
-                 <at-fielderrors [form]="amiFilterLinuxEditForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
-              </div>
-         </div>  
 
             <!-- Input  Virtualization Type -->
             <div class="ui-g ui-md-offset-1">

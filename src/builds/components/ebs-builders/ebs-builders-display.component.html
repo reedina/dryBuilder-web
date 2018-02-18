@@ -1,0 +1,228 @@
+ <div class="alltimesheets ui-g"> 
+    
+      <div class="header ui-g-12">
+        <h2>
+          Amazon Ebs Builders
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="ebsBuilders" class="ui-g-12" sortField="account_name" sortOrder="1" emptyMessage="No EBS Builders found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="ebs_builders"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+  
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="builder_name" header="Builder Name" [sortable]="true" ></p-column>
+        <p-column field="ami_name" header="AMI Name" [sortable]="true" ></p-column>
+        <p-column field="aws_auth_id" header="AWS Auth ID" [sortable]="true" ></p-column>   
+        <p-column field="aws_regions_id" header="AWS Regions ID" [sortable]="true" ></p-column>       
+        <p-column field="aws_instance_types_id" header="AWS Instance Types ID" [sortable]="true" ></p-column> 
+        <p-column field="aws_src_ami_filter_linux_id" header="AWS AMI Filter ID" [sortable]="true" ></p-column> 
+
+
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#editEbs"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+
+                <a pageScroll href="#editEbs"><span id='clickableAwesomeFont' (click)="confirm3(row.id)"  pTooltip="Clone Record"><i class="fa  fa-clone fa-2x">
+                  
+                </i></span></a>
+
+
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD EBS  Form -->
+<div id="addEbs"></div>
+<p-panel header="Add EBS Builder" class="ui-g-6">
+  <form [formGroup]="ebsBuilderForm" (ngSubmit)="save()">
+
+    <!-- Input Builder Name -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="BuilderNameID" class="ui-g-12 ui-lg-2">Builder Name</label>
+         <input type="text" pInputText id="BuilderNameID" formControlName="builder_name" placeholder="Builder Name"  class="ui-g-12 ui-lg-8">
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="ebsBuilderForm" field="builder_name" nicename="Builder Name"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input AMI Name -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="AMINameID" class="ui-g-12 ui-lg-2">AMI Name</label>
+          <input type="text" pInputText id="AMINameID" formControlName="ami_name" placeholder="AMI Name"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="ebsBuilderForm" field="ami_name" nicename="AMI Name"> </at-fielderrors>
+          </div>
+     </div>
+
+      <!-- Input AWS AUTH ID -->
+         <div class="ui-g ui-md-offset-1">
+          <label for="AWSAuthID" class="ui-g-12 ui-lg-2">AWS Auth ID</label>
+          <input type="text" pInputText id="AWSAuthID" formControlName="aws_auth_id" placeholder="AWS Auth ID"  class="ui-g-12 ui-lg-8"> 
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="ebsBuilderForm" field="aws_auth_id" nicename="AWS Auth ID"> </at-fielderrors>
+          </div>
+     </div>  
+      <!-- Input AWS Regions ID -->
+      <div class="ui-g ui-md-offset-1">
+        <label for="AWSRegionsID" class="ui-g-12 ui-lg-2">AWS Regions ID</label>
+        <input type="text" pInputText id="AWSRegionsID" formControlName="aws_regions_id" placeholder="AWS Regions ID"  class="ui-g-12 ui-lg-8"> 
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="ebsBuilderForm" field="aws_regions_id" nicename="AWS Regions ID"> </at-fielderrors>
+        </div>
+   </div>  
+
+       <!-- Input AWS Instance Types ID -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="AWSInstanceTypesID" class="ui-g-12 ui-lg-2">AWS Instance Types ID</label>
+        <input type="text" pInputText id="AWSInstanceTypesID" formControlName="aws_instance_types_id" placeholder="AWS Instance Types ID"  class="ui-g-12 ui-lg-8"> 
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="ebsBuilderForm" field="aws_instance_types_id" nicename="AWS Instance Types ID"> </at-fielderrors>
+        </div>
+   </div>   
+    
+       <!-- Input AWS SRC AMI FILTER LINUX ID -->
+       <div class="ui-g ui-md-offset-1">
+        <label for="AWSSrcAmiFilterLinuxID" class="ui-g-12 ui-lg-2">AWS Src Ami Filter ID</label>
+        <input type="text" pInputText id="AWSSrcAmiFilterLinuxID" formControlName="aws_src_ami_filter_linux_id" placeholder="AWS Src AMI Filter ID"  class="ui-g-12 ui-lg-8"> 
+        <div  class="ui-g-12 ui-lg-offset-2" > 
+           <at-fielderrors [form]="ebsBuilderForm" field="aws_src_ami_filter_linux_id" nicename="AWS Src AMI Filter ID"> </at-fielderrors>
+        </div>
+   </div>  
+        <!-- Input SSH Username -->
+        <div class="ui-g ui-md-offset-1">
+          <label for="SSHUsernameID" class="ui-g-12 ui-lg-2">SSH Username</label>
+          <input type="text" pInputText id="SSHUsernameID" formControlName="ssh_username" placeholder="SSH Username"  class="ui-g-12 ui-lg-8"> 
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="ebsBuilderForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
+          </div>
+     </div>   
+   
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!ebsBuilderForm.dirty || !ebsBuilderForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!(ebsBuilderForm.dirty || ebsBuilderForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+  
+    </form>
+ </p-panel>
+</div>
+<!-- End add form -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT Auth Form -->
+    <div id="editEbs"></div>
+    <p-panel header="Edit AWS Auth" class="ui-g-6">
+      <form [formGroup]="ebsBuilderEditForm" (ngSubmit)="update()">
+
+        <!-- Input Ebs Builder ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="EditID" class="ui-g-12 ui-lg-2">ID</label>
+            <input type="text" pInputText id="EditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="ebsBuilderEditForm" field="id" nicename="Auth ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input Builder Name -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="BuilderNameEditID" class="ui-g-12 ui-lg-2">Builder Name</label>
+             <input type="text" pInputText id="BuilderNameEditID" formControlName="builder_name"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="ebsBuilderEditForm" field="builder_name" nicename="Builder Name"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input AMI Name  -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="AMINameEditID" class="ui-g-12 ui-lg-2">AMI Name</label>
+              <input type="text" pInputText id="AMINameEditID" formControlName="ami_name"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="ebsBuilderEditForm" field="ami_name" nicename="ami_name"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input AWS Auth ID -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="AWSAuthIDEdit" class="ui-g-12 ui-lg-2">AWS Auth ID</label>
+              <input type="text" pInputText id="AWSAuthIDEdit" formControlName="aws_auth_id"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="ebsBuilderEditForm" field="aws_auth_id" nicename="AWS Auth ID"> </at-fielderrors>
+              </div>
+         </div>  
+    
+          <!-- Input AWS Regions ID -->
+          <div class="ui-g ui-md-offset-1">
+            <label for="AWSRegionsIDEdit" class="ui-g-12 ui-lg-2">AWS Regions ID</label>
+            <input type="text" pInputText id="AWSRegionsIDEdit" formControlName="aws_regions_id"  class="ui-g-12 ui-lg-8">
+            <div  class="ui-g-12 ui-lg-offset-2" > 
+               <at-fielderrors [form]="ebsBuilderEditForm" field="aws_regions_id" nicename="AWS Regions ID"> </at-fielderrors>
+            </div>
+       </div>  
+         
+           <!-- Input AWS Instance Types ID -->
+           <div class="ui-g ui-md-offset-1">
+            <label for="AWSInstanceTypesIDEdit" class="ui-g-12 ui-lg-2">AWS Instance Types ID</label>
+            <input type="text" pInputText id="AWSInstanceTypesIDEdit" formControlName="aws_instance_types_id"  class="ui-g-12 ui-lg-8">
+            <div  class="ui-g-12 ui-lg-offset-2" > 
+               <at-fielderrors [form]="ebsBuilderEditForm" field="aws_instance_types_id" nicename="AWS Auth ID"> </at-fielderrors>
+            </div>
+       </div>        
+             <!-- Input AWS Src Ami Filter Linux ID -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="AWSSrcAmiFilterLinuxIDEdit" class="ui-g-12 ui-lg-2">AWS Src Ami Filter ID</label>
+              <input type="text" pInputText id="AWSSrcAmiFilterLinuxIDEdit" formControlName="aws_src_ami_filter_linux_id"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="ebsBuilderEditForm" field="aws_src_ami_filter_linux_id" nicename="AWS Src Ami Filter ID"> </at-fielderrors>
+              </div>
+         </div>    
+           <!-- Input SSH  Username  -->
+           <div class="ui-g ui-md-offset-1">
+            <label for="SSHUsernameIDEdit" class="ui-g-12 ui-lg-2">SSH username</label>
+            <input type="text" pInputText id="SSHUsernameIDEdit" formControlName="ssh_username"  class="ui-g-12 ui-lg-8">
+            <div  class="ui-g-12 ui-lg-offset-2" > 
+               <at-fielderrors [form]="ebsBuilderEditForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
+            </div>
+       </div>    
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!ebsBuilderEditForm.dirty || !ebsBuilderEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!(ebsBuilderEditForm.dirty || ebsBuilderEditForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+    
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+
