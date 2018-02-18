@@ -37,3 +37,10 @@ export const getSelectedInstanceType = createSelector(
 
 );
 
+
+export const getAwsInstanceTypeSelectList = createSelector(
+  getAllAwsInstanceTypes,
+  (elements: AwsInstanceType[]) => {
+      return elements.map(element => Object.assign({}, { label: element.type, value: element.id}) );
+  }
+);

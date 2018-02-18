@@ -37,3 +37,11 @@ export const getSelectedRegion = createSelector(
 
 );
 
+export const getAwsRegionSelectList = createSelector(
+  getAllAwsRegions,
+  (elements: AwsRegion[]) => {
+      return elements.map(element => Object.assign({}, { label: element.name, value: element.id}) );
+  }
+);
+
+

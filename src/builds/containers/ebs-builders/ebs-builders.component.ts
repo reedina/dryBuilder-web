@@ -16,6 +16,9 @@ import { Observable } from 'rxjs/Observable';
     [ebsBuilderEdit]="ebsBuilder$ | async"
     (updateEbsBuilder)="updateForm($event)"
     [ebsBuilderClone]="ebsBuilderClone$ | async"
+    [awsAuthSelectList]="awsAuthsSelectList$ | async"
+    [awsRegionSelectList]="awsRegionSelectList$ | async"
+    [awsInstanceTypeSelectList]="awsInstanceTypeSelectList$ | async"
     (remove)="onRemove($event)">
     </app-ebs-builders-display>
   `
@@ -25,6 +28,9 @@ export class EbsBuildersComponent  implements OnInit {
   ebsBuilders$: Observable<EbsBuilder[]>;
   ebsBuilder$: Observable<EbsBuilder>;
   ebsBuilderClone$: Observable<EbsBuilder>;
+  awsAuthsSelectList$: Observable<any>;
+  awsRegionSelectList$: Observable<any>;
+  awsInstanceTypeSelectList$: Observable<any>;
 
   constructor(private store: Store<fromStore.BuildState>, private ebsBuilders: EbsBuildersService) {}
 
@@ -33,6 +39,9 @@ export class EbsBuildersComponent  implements OnInit {
       this.ebsBuilders$ = this.store.select(fromStore.getAllEbsBuilders);
       this.ebsBuilder$ = this.store.select(fromStore.getSelectedEbsBuilder);
       this.ebsBuilderClone$ = this.store.select(fromStore.getSelectedEbsBuilderClone);
+      this.awsAuthsSelectList$ = this.store.select(fromStore.getAwsAuthSelectList);
+      this.awsRegionSelectList$ = this.store.select(fromStore.getAwsRegionSelectList);
+      this.awsInstanceTypeSelectList$ = this.store.select(fromStore.getAwsInstanceTypeSelectList);
       // this.store.select(fromStore.getQueryParamsEdit).subscribe(x => console.log(x.edit));
   }
 

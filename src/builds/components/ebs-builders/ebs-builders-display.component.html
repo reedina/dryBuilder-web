@@ -83,16 +83,19 @@
 
       <!-- Input AWS AUTH ID -->
          <div class="ui-g ui-md-offset-1">
-          <label for="AWSAuthID" class="ui-g-12 ui-lg-2">AWS Auth ID</label>
-          <input type="text" pInputText id="AWSAuthID" formControlName="aws_auth_id" placeholder="AWS Auth ID"  class="ui-g-12 ui-lg-8"> 
+          <label for="AWSAuthID" class="ui-g-12 ui-lg-2">Authentication</label>
+          <!-- <input type="text" pInputText id="AWSAuthID" formControlName="aws_auth_id" placeholder="AWS Auth ID"  class="ui-g-12 ui-lg-8"> -->
+          <p-dropdown  placeholder="Select Authentication" autoWidth="true"  [style]="{'width': '100%'}" id="AWSAuthID" formControlName="aws_auth_id" [options]="awsAuthSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+
           <div  class="ui-g-12 ui-lg-offset-2" > 
              <at-fielderrors [form]="ebsBuilderForm" field="aws_auth_id" nicename="AWS Auth ID"> </at-fielderrors>
           </div>
      </div>  
       <!-- Input AWS Regions ID -->
       <div class="ui-g ui-md-offset-1">
-        <label for="AWSRegionsID" class="ui-g-12 ui-lg-2">AWS Regions ID</label>
-        <input type="text" pInputText id="AWSRegionsID" formControlName="aws_regions_id" placeholder="AWS Regions ID"  class="ui-g-12 ui-lg-8"> 
+        <label for="AWSRegionsID" class="ui-g-12 ui-lg-2">Region</label>
+        <p-dropdown  placeholder="Select Region" autoWidth="true"  [style]="{'width': '100%'}" id="AWSRegionID" formControlName="aws_regions_id" [options]="awsRegionSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+        <!-- <input type="text" pInputText id="AWSRegionsID" formControlName="aws_regions_id" placeholder="AWS Regions ID"  class="ui-g-12 ui-lg-8"> -->
         <div  class="ui-g-12 ui-lg-offset-2" > 
            <at-fielderrors [form]="ebsBuilderForm" field="aws_regions_id" nicename="AWS Regions ID"> </at-fielderrors>
         </div>
@@ -100,8 +103,9 @@
 
        <!-- Input AWS Instance Types ID -->
        <div class="ui-g ui-md-offset-1">
-        <label for="AWSInstanceTypesID" class="ui-g-12 ui-lg-2">AWS Instance Types ID</label>
-        <input type="text" pInputText id="AWSInstanceTypesID" formControlName="aws_instance_types_id" placeholder="AWS Instance Types ID"  class="ui-g-12 ui-lg-8"> 
+        <label for="AWSInstanceTypesID" class="ui-g-12 ui-lg-2">Instance Type</label>
+        <p-dropdown  placeholder="Select Instance Type" autoWidth="true"  [style]="{'width': '100%'}" id="AWSInstanceTypeID" formControlName="aws_instance_types_id" [options]="awsInstanceTypeSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+       <!--  <input type="text" pInputText id="AWSInstanceTypesID" formControlName="aws_instance_types_id" placeholder="AWS Instance Types ID"  class="ui-g-12 ui-lg-8"> -->
         <div  class="ui-g-12 ui-lg-offset-2" > 
            <at-fielderrors [form]="ebsBuilderForm" field="aws_instance_types_id" nicename="AWS Instance Types ID"> </at-fielderrors>
         </div>
@@ -171,26 +175,29 @@
     
           <!-- Input AWS Auth ID -->
              <div class="ui-g ui-md-offset-1">
-              <label for="AWSAuthIDEdit" class="ui-g-12 ui-lg-2">AWS Auth ID</label>
-              <input type="text" pInputText id="AWSAuthIDEdit" formControlName="aws_auth_id"  class="ui-g-12 ui-lg-8">
+              <label for="AWSAuthIDEdit" class="ui-g-12 ui-lg-2">Authentication</label>
+              <!-- <input type="text" pInputText id="AWSAuthIDEdit" formControlName="aws_auth_id"  class="ui-g-12 ui-lg-8"> -->
+              <p-dropdown  placeholder="Select Authentication" autoWidth="true"  [style]="{'width': '100%'}" id="AWSAuthEditID" formControlName="aws_auth_id" [options]="awsAuthSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
               <div  class="ui-g-12 ui-lg-offset-2" > 
-                 <at-fielderrors [form]="ebsBuilderEditForm" field="aws_auth_id" nicename="AWS Auth ID"> </at-fielderrors>
+                 <at-fielderrors [form]="ebsBuilderEditForm" field="aws_auth_id" nicename="Authentication"> </at-fielderrors>
               </div>
          </div>  
     
           <!-- Input AWS Regions ID -->
           <div class="ui-g ui-md-offset-1">
-            <label for="AWSRegionsIDEdit" class="ui-g-12 ui-lg-2">AWS Regions ID</label>
-            <input type="text" pInputText id="AWSRegionsIDEdit" formControlName="aws_regions_id"  class="ui-g-12 ui-lg-8">
+            <label for="AWSRegionsIDEdit" class="ui-g-12 ui-lg-2">Region</label>
+            <p-dropdown  placeholder="Select Region" autoWidth="true"  [style]="{'width': '100%'}" id="AWSRegionEditID" formControlName="aws_regions_id" [options]="awsRegionSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+            <!-- <input type="text" pInputText id="AWSRegionsIDEdit" formControlName="aws_regions_id"  class="ui-g-12 ui-lg-8"> -->
             <div  class="ui-g-12 ui-lg-offset-2" > 
-               <at-fielderrors [form]="ebsBuilderEditForm" field="aws_regions_id" nicename="AWS Regions ID"> </at-fielderrors>
+               <at-fielderrors [form]="ebsBuilderEditForm" field="aws_regions_id" nicename="Region"> </at-fielderrors>
             </div>
        </div>  
          
            <!-- Input AWS Instance Types ID -->
            <div class="ui-g ui-md-offset-1">
-            <label for="AWSInstanceTypesIDEdit" class="ui-g-12 ui-lg-2">AWS Instance Types ID</label>
-            <input type="text" pInputText id="AWSInstanceTypesIDEdit" formControlName="aws_instance_types_id"  class="ui-g-12 ui-lg-8">
+            <label for="AWSInstanceTypesIDEdit" class="ui-g-12 ui-lg-2">Instance Type</label>
+            <p-dropdown  placeholder="Select Instance Type" autoWidth="true"  [style]="{'width': '100%'}" id="AWSInstanceTypeEditID" formControlName="aws_instance_types_id" [options]="awsInstanceTypeSelectList"  class="ui-g-12 ui-lg-8"></p-dropdown>
+            <!-- <input type="text" pInputText id="AWSInstanceTypesIDEdit" formControlName="aws_instance_types_id"  class="ui-g-12 ui-lg-8"> -->
             <div  class="ui-g-12 ui-lg-offset-2" > 
                <at-fielderrors [form]="ebsBuilderEditForm" field="aws_instance_types_id" nicename="AWS Auth ID"> </at-fielderrors>
             </div>

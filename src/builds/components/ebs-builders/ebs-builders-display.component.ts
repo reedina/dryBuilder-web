@@ -27,6 +27,9 @@ export class EbsBuildersDisplayComponent implements OnChanges {
   @Output() remove = new EventEmitter<EbsBuilder>();
   @Input() ebsBuilderEdit: EbsBuilder;
   @Input() ebsBuilderClone: EbsBuilder;
+  @Input() awsAuthSelectList: any;
+  @Input() awsRegionSelectList: any;
+  @Input() awsInstanceTypeSelectList: any;
 
 
   ebsBuilderForm: FormGroup;

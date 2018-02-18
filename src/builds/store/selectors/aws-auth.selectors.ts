@@ -37,3 +37,11 @@ export const getSelectedAuth = createSelector(
 
 );
 
+
+export const getAwsAuthSelectList = createSelector(
+  getAllAwsAuths,
+  (elements: AwsAuth[]) => {
+      return elements.map(element => Object.assign({}, { label: element.account_name, value: element.id}) );
+  }
+);
+

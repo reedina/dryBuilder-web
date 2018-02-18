@@ -22,6 +22,7 @@ export class AwsRegionsComponent  implements OnInit {
 
   awsRegions$: Observable<AwsRegion[]>;
   awsRegion$: Observable<AwsRegion>;
+  
 
   constructor(private store: Store<fromStore.BuildState>, private awsRegions: AwsRegionsService) {}
 
