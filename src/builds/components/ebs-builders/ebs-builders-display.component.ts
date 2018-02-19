@@ -8,8 +8,16 @@ import {ConfirmationService} from 'primeng/api';
 import {SpinnerModule} from 'primeng/spinner';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {Message} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
 import { _ } from 'underscore';
 
+
+export interface Car {
+    vin;
+    year;
+    brand;
+    color;
+}
 
 @Component({
   selector: 'app-ebs-builders-display',
@@ -18,6 +26,10 @@ import { _ } from 'underscore';
   providers: [ConfirmationService]
 })
 export class EbsBuildersDisplayComponent implements OnChanges {
+
+    cars: Car[] = [{ vin: 'asdf',  year: 1012, brand: 'sdfsd', color: 'sdfsd' }];
+
+    add_ssh_username: boolean;
 
   ebsBuilder: EbsBuilder =  new EbsBuilderClass();
 
@@ -106,6 +118,9 @@ export class EbsBuildersDisplayComponent implements OnChanges {
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_name: '', ami_name: '', aws_auth_id: '', aws_regions_id: '',
              aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: ''}; }
+
+                this.enable_optional(curEdit['ssh_username'], 'add_ssh_username');
+
                 this.ebsBuilderForm.setValue({
                     builder_name: curEdit['builder_name'],
                     ami_name: curEdit['ami_name'],
@@ -194,4 +209,18 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         console.log('Edit Form not dirty and valid');
     }
   }
+
+  isBlank(str) {
+      if (str === null || str.length === 0 || str === ' ')  {
+          return true; 
+      }
+      return false;
+    }
+
+    enable_optional(checkEmpty, enable_field) {
+      const value = this.isBlank(checkEmpty);
+      if (!value) {
+          this[enable_field] = true;
+      }
+    }
 }

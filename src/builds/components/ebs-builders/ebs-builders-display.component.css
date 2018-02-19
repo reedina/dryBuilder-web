@@ -52,3 +52,13 @@ button {
 .ui-dropdown    {
   width:100% !important;
 }
+
+
+.ligher-header {
+  font-weight: 500;
+  font-size: 1.17em;
+}
+
+.button_spacer {
+  margin: 5px;
+}

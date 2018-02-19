@@ -69,6 +69,7 @@ import {ToolbarModule} from 'primeng/primeng';
 import {TooltipModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
 
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
@@ -194,6 +195,7 @@ export const ROUTES: Routes = [
   TooltipModule,
   TreeModule,
   TreeTableModule,
+  TableModule,
  ],
   providers: [...fromServices.services],
   declarations: [...fromContainers.containers, ...fromComponents.components],

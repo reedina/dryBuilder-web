@@ -29,7 +29,7 @@
                   
                 </i></span></a>
 
-                <a pageScroll href="#addEbs"><span id='clickableAwesomeFont' (click)="confirm3(row.id)"  pTooltip="Clone Record"><i class="fa  fa-clone fa-2x">
+                <a pageScroll href="#editEbs"><span id='clickableAwesomeFont' (click)="confirm3(row.id)"  pTooltip="Clone Record"><i class="fa  fa-clone fa-2x">
                   
                 </i></span></a>
 
@@ -53,37 +53,16 @@
     </p-dataTable>
   
    <p-growl [value]="msgs" life="5000" ></p-growl>  
-   <div id="addEbs"></div>
+   
     </div>  
   <!-- End Data Table -->
-  
-<div class="alltimesheets ui-g" class="panel_spacer">
-    <p-panel header="Optional Fields" class="ui-g-6">
-      
-        <p-table [value]="cars">
-            <ng-template pTemplate="header">
-                <tr style="text-align: left">
-                    <th>Enable</th>
-                    <th>Field</th>
-                   
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-car>
-                <tr>
-                    <td><p-checkbox [(ngModel)]="add_ssh_username" binary="true"></p-checkbox></td>
-                    <td>ssh_username</td>
-     
-                </tr>
-            </ng-template>
-        </p-table>
 
-    </p-panel>
+<div class="alltimesheets ui-g" class="panel_spacer">
 <!-- Panel for ADD EBS  Form -->
+<div id="addEbs"></div>
 <p-panel header="Add EBS Builder" class="ui-g-6">
   <form [formGroup]="ebsBuilderForm" (ngSubmit)="save()">
-    <div>
-          <h1 class="ligher-header">Required</h1>
-    </div>
+
     <!-- Input Builder Name -->
     <div class="ui-g ui-lg-offset-1">
          <label for="BuilderNameID" class="ui-g-12 ui-lg-2">Builder Name</label>
@@ -141,11 +120,8 @@
            <at-fielderrors [form]="ebsBuilderForm" field="aws_src_ami_filter_linux_id" nicename="AWS Src AMI Filter ID"> </at-fielderrors>
         </div>
    </div>  
-   <div>
-      <h1 class="ligher-header">Optional</h1>
-   </div>
         <!-- Input SSH Username -->
-        <div class="ui-g ui-md-offset-1"  [hidden]="!add_ssh_username">
+        <div class="ui-g ui-md-offset-1">
           <label for="SSHUsernameID" class="ui-g-12 ui-lg-2">SSH Username</label>
           <input type="text" pInputText id="SSHUsernameID" formControlName="ssh_username" placeholder="SSH Username"  class="ui-g-12 ui-lg-8"> 
           <div  class="ui-g-12 ui-lg-offset-2" > 
@@ -155,7 +131,7 @@
    
    <!-- Submit/Reset Button -->
    <div class="ui-g ui-lg-offset-1">
-    <button  pButton type="submit" [disabled]="!ebsBuilderForm.dirty || !ebsBuilderForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+    <button pButton type="submit" [disabled]="!ebsBuilderForm.dirty || !ebsBuilderForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
      
     <button (click)="onReset()" pButton type="reset" [disabled]="!(ebsBuilderForm.dirty || ebsBuilderForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
   </div> 
@@ -166,16 +142,11 @@
 <!-- End add form -->
 
 <div class="alltimesheets ui-g" class="panel_spacer">
-    <p-panel header="Optional Fields" class="ui-g-6">
-      </p-panel>
     <!-- Panel for EDIT Auth Form -->
-    
+    <div id="editEbs"></div>
     <p-panel header="Edit AWS Auth" class="ui-g-6">
-        <div id="editEbs"></div>
       <form [formGroup]="ebsBuilderEditForm" (ngSubmit)="update()">
-      <div>
-          <h1 class="ligher-header">Required</h1>
-      </div>
+
         <!-- Input Ebs Builder ID -->
         <div class="ui-g ui-lg-offset-1">
             <label for="EditID" class="ui-g-12 ui-lg-2">ID</label>
@@ -241,9 +212,6 @@
                  <at-fielderrors [form]="ebsBuilderEditForm" field="aws_src_ami_filter_linux_id" nicename="AWS Src Ami Filter ID"> </at-fielderrors>
               </div>
          </div>    
-         <div>
-            <h1 class="ligher-header">Optional</h1>
-         </div>
            <!-- Input SSH  Username  -->
            <div class="ui-g ui-md-offset-1">
             <label for="SSHUsernameIDEdit" class="ui-g-12 ui-lg-2">SSH username</label>

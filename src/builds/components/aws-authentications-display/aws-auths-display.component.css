@@ -52,3 +52,7 @@ button {
 .ui-dropdown    {
   width:100% !important;
 }
+
+.button_spacer {
+  margin: 5px;
+}
