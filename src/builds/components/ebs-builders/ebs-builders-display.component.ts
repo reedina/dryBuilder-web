@@ -135,6 +135,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
     }
 
     confirm1(ebs_id) {
+        this.add_ssh_username = false;
         this.router.navigate(['/builds/packer/builder/ebs'], { queryParams:  {edit: ebs_id}} );
     }
 
@@ -145,6 +146,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
           icon: 'fa fa-trash',
           accept: () => {
               this.msgs = [{severity: 'error', summary: 'Confirmed', detail: `Deleting: <b>${ebs.builder_name}</b>`}];
+              this.add_ssh_username = false;
               this.router.navigate(['/builds/packer/builder/ebs' ]);
               this.remove.emit(ebs);
           },
@@ -154,6 +156,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
       });
   }
   confirm3(ebs_id) {
+    this.add_ssh_username = false;
     this.router.navigate(['/builds/packer/builder/ebs'], { queryParams:  {clone: ebs_id}} );
 }
 
@@ -178,10 +181,12 @@ export class EbsBuildersDisplayComponent implements OnChanges {
   onReset() {
     this.ebsBuilderForm.reset();
     this.router.navigate(['/builds/packer/builder/ebs' ]);
+    this.add_ssh_username = false;
   }
   onResetEdit() {
     this.ebsBuilderEditForm.reset();
     this.router.navigate(['/builds/packer/builder/ebs' ]);
+    this.add_ssh_username = false;
   }
   save(): void {
 
@@ -189,6 +194,8 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         console.log('Attempting to Save: ' + JSON.stringify(this.ebsBuilderForm.value));
         const t = Object.assign({}, this.ebsBuilder, this.ebsBuilderForm.value);
         this.ebsBuilderForm.reset();
+        this.router.navigate(['/builds/packer/builder/ebs' ]);
+        this.add_ssh_username = false;
         this.create.emit(t);
     }  else {
         // Remember, you only save a "valid" form
@@ -203,6 +210,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         const t = Object.assign({}, this.ebsBuilder, this.ebsBuilderEditForm.value);
         this.ebsBuilderEditForm.reset();
         this.router.navigate(['/builds/packer/builder/ebs' ]);
+        this.add_ssh_username = false;
         this.updateEbsBuilder.emit(t);
     }  else {
         // Remember, you only save a "valid" form

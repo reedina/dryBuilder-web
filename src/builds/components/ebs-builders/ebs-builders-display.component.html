@@ -58,7 +58,7 @@
   <!-- End Data Table -->
   
 <div class="alltimesheets ui-g" class="panel_spacer">
-    <p-panel header="Optional Fields" class="ui-g-6">
+    <p-panel header="Hide Optional Fields" class="ui-g-5">
       
         <p-table [value]="cars">
             <ng-template pTemplate="header">
@@ -79,7 +79,7 @@
 
     </p-panel>
 <!-- Panel for ADD EBS  Form -->
-<p-panel header="Add EBS Builder" class="ui-g-6">
+<p-panel header="Add EBS Builder" class="ui-g-7">
   <form [formGroup]="ebsBuilderForm" (ngSubmit)="save()">
     <div>
           <h1 class="ligher-header">Required</h1>
@@ -166,11 +166,11 @@
 <!-- End add form -->
 
 <div class="alltimesheets ui-g" class="panel_spacer">
-    <p-panel header="Optional Fields" class="ui-g-6">
+    <p-panel header="Hide Optional Fields" class="ui-g-5">
       </p-panel>
     <!-- Panel for EDIT Auth Form -->
     
-    <p-panel header="Edit AWS Auth" class="ui-g-6">
+    <p-panel header="Edit AWS Auth" class="ui-g-7">
         <div id="editEbs"></div>
       <form [formGroup]="ebsBuilderEditForm" (ngSubmit)="update()">
       <div>
