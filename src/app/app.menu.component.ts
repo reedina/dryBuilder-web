@@ -40,7 +40,7 @@ export class AppMenuComponent implements OnInit {
             },
             */
             {
-                label: 'AWS', icon: 'cloud_queue',
+                label: 'AWS - Amazon', icon: 'cloud_queue',
                 items: [
                     {label: 'Regions', icon: 'place', routerLink: ['/builds/aws/regions']},
                     {label: 'Instance Types', icon: 'computer', routerLink: ['/builds/aws/instance-types']},
@@ -52,8 +52,13 @@ export class AppMenuComponent implements OnInit {
                 label: 'Packer', icon: 'build',
                 items: [
                     {label: 'Builder Types', icon: 'devices', routerLink: ['/builds/packer/builder/types']},
-                    {label: 'Source AMI Filters', icon: 'devices', routerLink: ['/builds/packer/ami/linux/filters']},
-                    {label: 'Builder - Amazon-EBS', icon: 'devices', routerLink: ['/builds/packer/builder/ebs']}
+                    {
+                        label: 'AWS - Amazon', icon: 'cloud_queue',
+                        items: [
+                            {label: 'Source AMI Filters', icon: 'devices', routerLink: ['/builds/packer/ami/linux/filters']},
+                            {label: 'Builder - Amazon-EBS', icon: 'devices', routerLink: ['/builds/packer/builder/ebs']}
+                        ]
+                    }
                 ]
             } /*
               ,               
@@ -168,7 +173,7 @@ export class AppMenuComponent implements OnInit {
            
 
             {label: 'Utils', icon: 'build', routerLink: ['/utils']},
-            {label: 'Documentation', icon: 'find_in_page', routerLink: ['/documentation']} */
+            {label: 'Documentation', icon: 'find_in_page', routerLink: ['/documentation']}  */
         ];
     }
 

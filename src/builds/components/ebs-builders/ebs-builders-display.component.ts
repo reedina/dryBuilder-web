@@ -30,6 +30,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
     cars: Car[] = [{ vin: 'asdf',  year: 1012, brand: 'sdfsd', color: 'sdfsd' }];
 
     add_ssh_username: boolean;
+    edit_ssh_username: boolean;
 
   ebsBuilder: EbsBuilder =  new EbsBuilderClass();
 
@@ -102,6 +103,9 @@ export class EbsBuildersDisplayComponent implements OnChanges {
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_name: '', ami_name: '', aws_auth_id: '', aws_regions_id: '',
                     aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: ''}; }
+
+                this.enable_optional(curEdit['ssh_username'], 'edit_ssh_username');
+
                 this.ebsBuilderEditForm.setValue({
                         id: curEdit['id'],
                         builder_name: curEdit['builder_name'],
@@ -136,6 +140,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
 
     confirm1(ebs_id) {
         this.add_ssh_username = false;
+        this.edit_ssh_username = false;
         this.router.navigate(['/builds/packer/builder/ebs'], { queryParams:  {edit: ebs_id}} );
     }
 
@@ -147,6 +152,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
           accept: () => {
               this.msgs = [{severity: 'error', summary: 'Confirmed', detail: `Deleting: <b>${ebs.builder_name}</b>`}];
               this.add_ssh_username = false;
+              this.edit_ssh_username = false;
               this.router.navigate(['/builds/packer/builder/ebs' ]);
               this.remove.emit(ebs);
           },
@@ -157,6 +163,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
   }
   confirm3(ebs_id) {
     this.add_ssh_username = false;
+    this.edit_ssh_username = false;
     this.router.navigate(['/builds/packer/builder/ebs'], { queryParams:  {clone: ebs_id}} );
 }
 
@@ -186,7 +193,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
   onResetEdit() {
     this.ebsBuilderEditForm.reset();
     this.router.navigate(['/builds/packer/builder/ebs' ]);
-    this.add_ssh_username = false;
+    this.edit_ssh_username = false;
   }
   save(): void {
 
@@ -196,6 +203,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         this.ebsBuilderForm.reset();
         this.router.navigate(['/builds/packer/builder/ebs' ]);
         this.add_ssh_username = false;
+        this.edit_ssh_username = false;
         this.create.emit(t);
     }  else {
         // Remember, you only save a "valid" form
@@ -211,6 +219,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         this.ebsBuilderEditForm.reset();
         this.router.navigate(['/builds/packer/builder/ebs' ]);
         this.add_ssh_username = false;
+        this.edit_ssh_username = false;
         this.updateEbsBuilder.emit(t);
     }  else {
         // Remember, you only save a "valid" form
