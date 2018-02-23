@@ -74,6 +74,11 @@
                     <td>ssh_username</td>
      
                 </tr>
+                <tr>
+                    <td><p-checkbox [(ngModel)]="add_ami_description" binary="true"></p-checkbox></td>
+                    <td>ami_description</td>
+     
+                </tr>
             </ng-template>
         </p-table>
 
@@ -152,6 +157,15 @@
              <at-fielderrors [form]="ebsBuilderForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
           </div>
      </div>   
+    
+             <!-- Input AMI Description -->
+        <div class="ui-g ui-md-offset-1"  [hidden]="!add_ami_description">
+          <label for="AMIDescriptionID" class="ui-g-12 ui-lg-2">AMI Description</label>
+          <input type="text" pInputText id="AMIDescriptionID" formControlName="ami_description" placeholder="AMI Description"  class="ui-g-12 ui-lg-8"> 
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="ebsBuilderForm" field="ami_description" nicename="AMI Description"> </at-fielderrors>
+          </div>
+     </div>  
    
    <!-- Submit/Reset Button -->
    <div class="ui-g ui-lg-offset-1">
@@ -180,6 +194,11 @@
                 <tr>
                     <td><p-checkbox [(ngModel)]="edit_ssh_username" binary="true"></p-checkbox></td>
                     <td>ssh_username</td>
+     
+                </tr>
+                <tr>
+                    <td><p-checkbox [(ngModel)]="edit_ami_description" binary="true"></p-checkbox></td>
+                    <td>ami_description</td>
      
                 </tr>
             </ng-template>
@@ -271,7 +290,16 @@
                <at-fielderrors [form]="ebsBuilderEditForm" field="ssh_username" nicename="SSH Username"> </at-fielderrors>
             </div>
        </div>    
-        
+
+            <!-- Input AMI Description  -->
+            <div class="ui-g ui-md-offset-1" [hidden]="!edit_ami_description">
+            <label for="AMIDescriptionIDEdit" class="ui-g-12 ui-lg-2">AMI Description</label>
+            <input type="text" pInputText id="AMIDescriptionIDEdit" formControlName="ami_description"  class="ui-g-12 ui-lg-8">
+            <div  class="ui-g-12 ui-lg-offset-2" > 
+                   <at-fielderrors [form]="ebsBuilderEditForm" field="ami_description" nicename="AMI Description"> </at-fielderrors>
+            </div>
+           </div>   
+
        <!-- Submit/Reset Button -->
        <div class="ui-g ui-lg-offset-1">
         <button pButton type="submit" [disabled]="!ebsBuilderEditForm.dirty || !ebsBuilderEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   

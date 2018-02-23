@@ -9,7 +9,8 @@ export class EbsBuilderClass implements EbsBuilder {
     public aws_regions_id = 0,
     public aws_instance_types_id = 0,
     public aws_src_ami_filter_linux_id = 0,
-    public ssh_username = '') {}
+    public ssh_username = '',
+    public ami_description = '') {}
 
 }
 
@@ -23,5 +24,6 @@ export interface EbsBuilder {
   aws_instance_types_id: number;
   aws_src_ami_filter_linux_id: number;
   ssh_username: string;
+  ami_description: string;
 }
 

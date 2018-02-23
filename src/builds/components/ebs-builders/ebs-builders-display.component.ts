@@ -31,6 +31,8 @@ export class EbsBuildersDisplayComponent implements OnChanges {
 
     add_ssh_username: boolean;
     edit_ssh_username: boolean;
+    add_ami_description: boolean;
+    edit_ami_description: boolean;
 
   ebsBuilder: EbsBuilder =  new EbsBuilderClass();
 
@@ -63,6 +65,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
       aws_instance_types_id:  ['', [Validators.required]],
       aws_src_ami_filter_linux_id:  ['', [Validators.required]],
       ssh_username:  [''],
+      ami_description: [''],
       });
 
       this.ebsBuilderEditForm = this.fb.group({
@@ -74,6 +77,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         aws_instance_types_id:  ['', [Validators.required]],
         aws_src_ami_filter_linux_id:  ['', [Validators.required]],
         ssh_username:  [''],
+        ami_description: [''],
         });
     }
 
@@ -102,9 +106,10 @@ export class EbsBuildersDisplayComponent implements OnChanges {
             const chngEdit = changes['ebsBuilderEdit'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_name: '', ami_name: '', aws_auth_id: '', aws_regions_id: '',
-                    aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: ''}; }
+                    aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: '', ami_description: ''}; }
 
                 this.enable_optional(curEdit['ssh_username'], 'edit_ssh_username');
+                this.enable_optional(curEdit['ami_description'], 'edit_ami_description');
 
                 this.ebsBuilderEditForm.setValue({
                         id: curEdit['id'],
@@ -115,15 +120,17 @@ export class EbsBuildersDisplayComponent implements OnChanges {
                         aws_instance_types_id: curEdit['aws_instance_types_id'],
                         aws_src_ami_filter_linux_id: curEdit['aws_src_ami_filter_linux_id'],
                         ssh_username: curEdit['ssh_username'],
+                        ami_description: curEdit['ami_description'],
                 });
          }
          if (changes['ebsBuilderClone']) {
             const chngEdit = changes['ebsBuilderClone'];
              let curEdit  = chngEdit.currentValue;
              if (curEdit === undefined ) { curEdit = { id: '', builder_name: '', ami_name: '', aws_auth_id: '', aws_regions_id: '',
-             aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: ''}; }
+             aws_instance_types_id: '', aws_src_ami_filter_linux_id: '', ssh_username: '', ami_description: ''}; }
 
                 this.enable_optional(curEdit['ssh_username'], 'add_ssh_username');
+                this.enable_optional(curEdit['ami_description'], 'add_ami_description');
 
                 this.ebsBuilderForm.setValue({
                     builder_name: curEdit['builder_name'],
@@ -133,6 +140,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
                     aws_instance_types_id: curEdit['aws_instance_types_id'],
                     aws_src_ami_filter_linux_id: curEdit['aws_src_ami_filter_linux_id'],
                     ssh_username: curEdit['ssh_username'],
+                    ami_description: curEdit['ami_description'],
                 });
          }
 
@@ -189,11 +197,13 @@ export class EbsBuildersDisplayComponent implements OnChanges {
     this.ebsBuilderForm.reset();
     this.router.navigate(['/builds/packer/builder/ebs' ]);
     this.add_ssh_username = false;
+    this.add_ami_description = false;
   }
   onResetEdit() {
     this.ebsBuilderEditForm.reset();
     this.router.navigate(['/builds/packer/builder/ebs' ]);
     this.edit_ssh_username = false;
+    this.edit_ami_description = false;
   }
   save(): void {
 
@@ -204,6 +214,8 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         this.router.navigate(['/builds/packer/builder/ebs' ]);
         this.add_ssh_username = false;
         this.edit_ssh_username = false;
+        this.add_ami_description = false;
+        this.edit_ami_description = false;
         this.create.emit(t);
     }  else {
         // Remember, you only save a "valid" form
@@ -220,6 +232,8 @@ export class EbsBuildersDisplayComponent implements OnChanges {
         this.router.navigate(['/builds/packer/builder/ebs' ]);
         this.add_ssh_username = false;
         this.edit_ssh_username = false;
+        this.add_ami_description = false;
+        this.edit_ami_description = false;
         this.updateEbsBuilder.emit(t);
     }  else {
         // Remember, you only save a "valid" form
@@ -229,7 +243,7 @@ export class EbsBuildersDisplayComponent implements OnChanges {
 
   isBlank(str) {
       if (str === null || str.length === 0 || str === ' ')  {
-          return true; 
+          return true;
       }
       return false;
     }
