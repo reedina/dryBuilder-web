@@ -118,6 +118,10 @@ export const ROUTES: Routes = [
   {
     path: 'packer/builder/ebs',
     component:  fromContainers.EbsBuildersComponent
+  },
+  {
+    path: 'packer/ami/user-data-files',
+    component:  fromContainers.UserDataFilesComponent
   }
 ];
 @NgModule({

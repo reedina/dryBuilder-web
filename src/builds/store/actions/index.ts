@@ -5,3 +5,4 @@ export * from './aws-auth.actions';
 export * from './packer-builder-type.actions';
 export * from './packer-ami-filter-linux.actions';
 export * from './ebs-builder.actions';
+export * from './user-data-file.actions';

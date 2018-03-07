@@ -5,3 +5,4 @@ export * from './aws-auth.selectors';
 export * from './packer-builder-type.selectors';
 export * from './packer-ami-filter-linux.selectors';
 export * from './ebs-builder.selectors';
+export * from './user-data-file.selectors';

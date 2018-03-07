@@ -1,0 +1,174 @@
+<div class="alltimesheets ui-g">
+    
+      <div class="header ui-g-12">
+        <h2>
+          AWS - User Data Files
+        </h2>
+      </div>
+  
+    <!-- Data Table -->    
+    <p-dataTable #dt [value]="userDataFiles" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No User Data Files found"
+    [reorderableColumns]="true"  [globalFilter]="tableSearch" exportFilename="user_data_files"
+     [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25,50,75]" [pageLinks]="8"  [responsive]="true" resizableColumns="true">
+  
+     <p-column field="id" header="Id" [sortable]="true" >
+      </p-column>
+        <p-column field="name" header="Name" [sortable]="true" ></p-column>
+        <p-column field="description" header="Description" [sortable]="true" ></p-column>
+        <p-column field="tags" header="Tags" [sortable]="true" ></p-column>      
+        <p-column field="id" >
+          <ng-template  let-row="rowData" pTemplate="body"> 
+            
+            <div>
+                <a pageScroll href="#userDataFile"><span id='clickableAwesomeFont' (click)="confirm1(row.id)"  pTooltip="Edit Record"><i class="fa fa-pencil fa-2x">
+                  
+                </i></span></a>
+              <span id='clickableAwesomeFont' (click)="confirm2(row)" pTooltip="Delete Record"><i class="fa fa-trash fa-2x"></i></span>
+            
+          </div>
+            
+           
+        </ng-template>
+           
+          
+          </p-column>
+        <p-footer>
+            <label for="tableSearch">Search: </label>
+            <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+            <button type="button" pButton icon="fa-floppy-o" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+            
+          </p-footer>
+  
+    </p-dataTable>
+  
+   <p-growl [value]="msgs" life="5000" ></p-growl>  
+   
+    </div>  
+  <!-- End Data Table -->
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+<!-- Panel for ADD User Data File Form -->
+<div id="userDataFile"></div>
+<p-panel header="Add AWS User Data File" class="ui-g-6">
+  <form [formGroup]="userDataFileForm" (ngSubmit)="save()">
+
+    <!-- Input User Data File Name -->
+    <div class="ui-g ui-lg-offset-1">
+         <label for="UserDataFileNameID" class="ui-g-12 ui-lg-2">Name</label>
+         <input type="text" pInputText id="UserDataFileNameID" formControlName="name" placeholder="Name"  class="ui-g-12 ui-lg-8">
+         <div  class="ui-g-12 ui-md-offset-2" > 
+            <at-fielderrors [form]="userDataFileForm" field="name" nicename="Name"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input Description -->
+    <div class="ui-g ui-md-offset-1">
+          <label for="DescriptionID" class="ui-g-12 ui-lg-2">Description</label>
+          <input type="text" pInputText id="DescriptionID" formControlName="description" placeholder="Description"  class="ui-g-12 ui-lg-8">
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="userDataFileForm" field="description" nicename="Description"> </at-fielderrors>
+          </div>
+     </div>
+
+         <!-- Input Tags -->
+    <div class="ui-g ui-md-offset-1">
+      <label for="TagsID" class="ui-g-12 ui-lg-2">Tags</label>
+      <input type="text" pInputText id="TagsID" formControlName="tags" placeholder="Comma Separated List of Tags"  class="ui-g-12 ui-lg-8">
+      <div  class="ui-g-12 ui-lg-offset-2" > 
+         <at-fielderrors [form]="userDataFileForm" field="tags" nicename="Tags"> </at-fielderrors>
+      </div>
+    </div>
+
+      <!-- Input Source Code -->
+         <div class="ui-g ui-md-offset-1">
+          <label for="SourceCodeID" class="ui-g-12 ui-lg-2">Source Code</label>
+          <textarea pInputTextarea [rows]="25" [cols]="25" id="SourceCodeID" formControlName="source_code" placeholder="Source Code"  class="ui-g-12 ui-lg-8"></textarea> 
+          <!-- <input type="text" pInputText id="SourceCodeID" formControlName="source_code" placeholder="source code"  class="ui-g-12 ui-lg-8"> -->
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+             <at-fielderrors [form]="userDataFileForm" field="source_code" nicename="Source Code"> </at-fielderrors>
+          </div>
+     </div>  
+
+   
+   
+    
+    
+   <!-- Submit/Reset Button -->
+   <div class="ui-g ui-lg-offset-1">
+    <button pButton type="submit" [disabled]="!userDataFileForm.valid" label="Save" icon="fa-floppy-o" class="button_spacer"></button>   
+     
+    <button (click)="onReset()" pButton type="reset" [disabled]="!userDataFileForm.dirty" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+  </div> 
+                  
+    </form>
+ </p-panel>
+</div>
+
+<div class="alltimesheets ui-g" class="panel_spacer">
+    <!-- Panel for EDIT Region Form -->
+    <div id="userDataFile"></div>
+    <p-panel header="Edit AWS User Data Files" class="ui-g-6">
+      <form [formGroup]="userDataFileEditForm" (ngSubmit)="update()">
+
+        <!-- Input User Data File ID -->
+        <div class="ui-g ui-lg-offset-1">
+            <label for="IDEditID" class="ui-g-12 ui-lg-2">User Data File ID</label>
+            <input type="text" pInputText id="IDEditID" formControlName="id"  class="ui-g-12 ui-lg-8" readonly>
+            <div  class="ui-g-12 ui-md-offset-2" > 
+               <at-fielderrors [form]="userDataFileEditForm" field="id" nicename="ID"> </at-fielderrors>
+            </div>
+       </div>        
+    
+        <!-- Input User Data File Name -->
+        <div class="ui-g ui-lg-offset-1">
+             <label for="NameEditID" class="ui-g-12 ui-lg-2">Name</label>
+             <input type="text" pInputText id="NameEditID" formControlName="name"  class="ui-g-12 ui-lg-8">
+             <div  class="ui-g-12 ui-md-offset-2" > 
+                <at-fielderrors [form]="userDataFileEditForm" field="name" nicename="Name"> </at-fielderrors>
+             </div>
+        </div>
+    
+        <!-- Input User Data File Description -->
+        <div class="ui-g ui-md-offset-1">
+              <label for="DescriptionEditID" class="ui-g-12 ui-lg-2">Description</label>
+              <input type="text" pInputText id="DescriptionEditID" formControlName="description"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="userDataFileEditForm" field="description" nicename="Description"> </at-fielderrors>
+              </div>
+         </div>
+    
+          <!-- Input User Data File Tags -->
+             <div class="ui-g ui-md-offset-1">
+              <label for="TagsIDEdit" class="ui-g-12 ui-lg-2">Tags</label>
+              <input type="text" pInputText id="TagsEditID" formControlName="tags"  class="ui-g-12 ui-lg-8">
+              <div  class="ui-g-12 ui-lg-offset-2" > 
+                 <at-fielderrors [form]="userDataFileEditForm" field="tags" nicename="tags"> </at-fielderrors>
+              </div>
+         </div>  
+    
+        <!-- Input Source Code -->
+        <div class="ui-g ui-md-offset-1">
+          <label for="SourceCodeEditID" class="ui-g-12 ui-lg-2">Source Code</label>
+          <textarea pInputTextarea [rows]="25" [cols]="25" id="SourceCodeEditID" formControlName="source_code" placeholder="Source Code"  class="ui-g-12 ui-lg-8"></textarea>
+          <!-- <input type="text" pInputText id="SourceCodeEditID" formControlName="source_code" placeholder="source code"  class="ui-g-12 ui-lg-8"> -->
+          <div  class="ui-g-12 ui-lg-offset-2" > 
+            <at-fielderrors [form]="userDataFileEditForm" field="source_code" nicename="Source Code"> </at-fielderrors>
+          </div>
+        </div>        
+       
+        
+        
+       <!-- Submit/Reset Button -->
+       <div class="ui-g ui-lg-offset-1">
+        <button pButton type="submit" [disabled]="!userDataFileEditForm.dirty || !userDataFileEditForm.valid" label="Update" icon="fa-floppy-o" class="button_spacer"></button>   
+         
+        <button (click)="onResetEdit()" pButton type="reset" [disabled]="!(userDataFileEditForm.dirty || userDataFileEditForm.valid)" label="Erase" icon="fa-eraser" class="button_spacer"></button> 
+      </div> 
+                      
+        </form>
+     </p-panel>
+    </div>
+<div>
+<p-confirmDialog></p-confirmDialog>
+</div>
+

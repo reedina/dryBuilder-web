@@ -56,6 +56,7 @@ export class AppMenuComponent implements OnInit {
                         label: 'AWS - Amazon', icon: 'cloud_queue',
                         items: [
                             {label: 'Source AMI Filters', icon: 'devices', routerLink: ['/builds/packer/ami/linux/filters']},
+                            {label: 'User Data Files', icon: 'devices', routerLink: ['/builds/packer/ami/user-data-files']},
                             {label: 'Builder - Amazon-EBS', icon: 'devices', routerLink: ['/builds/packer/builder/ebs']}
                         ]
                     }
